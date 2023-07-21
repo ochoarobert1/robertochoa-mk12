@@ -18,6 +18,41 @@ class RobertCustomPostMeta
 		add_action('init', [$this, 'custom_casos_technology_taxonomy'], 0);
 		add_action('init', [$this, 'custom_services_cpt'], 0);
 		add_action('restrict_manage_posts', [$this, 'add_admin_filters'], 10, 1);
+		add_filter('manage_casos_posts_columns', [$this, 'add_custom_columns']);
+		add_action('manage_casos_posts_custom_column', [$this, 'custom_columns_data'], 10, 2);
+	}
+
+	/**
+	 * Method add_custom_columns
+	 *
+	 * @param $columns [explicite description]
+	 *
+	 * @return void
+	 */
+	public function add_custom_columns($columns)
+	{
+
+		unset($columns['date']);
+		$columns['thumbnail'] = __('Thumbnail', 'robertochoa');
+		$columns['date'] = __('Date', 'wordpress');
+
+		return $columns;
+	}
+
+	/**
+	 * Method custom_columns_data
+	 *
+	 * @param $column [explicite description]
+	 * @param $post_id [explicite description]
+	 *
+	 * @return void
+	 */
+	public function custom_columns_data($column, $post_id)
+	{
+		if ($column == 'thumbnail') {
+			$image = (get_the_post_thumbnail_url($post_id, 'thumbnail') != '') ? get_the_post_thumbnail_url($post_id, 'thumbnail') : 'http://placehold.it/70x70';
+			echo wp_kses_post(sprintf('<img src="%s" width="70" height="70" />', $image));
+		}
 	}
 
 	/**
