@@ -39,8 +39,8 @@ function robertochoa_load_styles()
 
         /*- SWIPER JS -*/
         if (is_front_page()) {
-            //wp_register_style('swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', false, '7.0.5', 'all');
-            //wp_enqueue_style('swiper-css');
+            wp_register_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css', false, '10.0.4', 'all');
+            wp_enqueue_style('swiper-css');
         }
 
         /*- GOOGLE FONTS -*/

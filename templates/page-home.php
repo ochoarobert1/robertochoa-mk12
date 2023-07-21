@@ -103,6 +103,21 @@
                 <?php $portfolio_title = ro_meta_value('ro_home_portfolio_title'); ?>
                 <h2><?php echo esc_html($portfolio_title); ?></h2>
             </header>
+            <div class="main-success-slider">
+                <?php $arr_portfolio = new WP_Query(['post_type' => 'casos', 'posts_per_page' => -1, 'orderby' => 'date', 'order' => 'ASC']); ?>
+                <?php if ($arr_portfolio->have_posts()) : ?>
+                    <div class="swiper swiper-success swiper-container-free-mode">
+                        <div class="swiper-wrapper">
+                            <?php while ($arr_portfolio->have_posts()) : $arr_portfolio->the_post(); ?>
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <div class="swiper-slide"><?php the_post_thumbnail('large', array('class' => 'response-class', 'itemprop' => 'image', 'loading' => 'lazy')); ?></div>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php wp_reset_query(); ?>
+            </div>
             <div class="main-success-content-button" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
                 <?php $btn_link = ro_meta_value('ro_home_portfolio_btn_link'); ?>
                 <?php $btn_text = ro_meta_value('ro_home_portfolio_btn_text'); ?>

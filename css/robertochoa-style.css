@@ -643,7 +643,7 @@ left:calc(100% - 6px);
 }
 /* HOME SUCCESS */
 .main-success-container {
-  background: #151515;
+  background: #222222;
   color: #ffffff;
   padding: 3rem 1rem;
 }
@@ -678,12 +678,6 @@ left:calc(100% - 6px);
   background: #3c3c3c;
   color: #ffffff;
 }
-.RSVP-light .close img {
-  width: 30px;
-  height: 30px;
-  opacity: 1;
-  -webkit-filter: hue-rotate(162deg) brightness(0.5);
-  -moz-filter: hue-rotate(162deg) brightness(0.5);
-  -ms-filter: hue-rotate(162deg) brightness(0.5);
-  filter: hue-rotate(162deg) brightness(0.5);
+.swiper-container-free-mode > .swiper-wrapper {
+  transition-timing-function: linear;
 }
