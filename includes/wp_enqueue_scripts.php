@@ -46,17 +46,15 @@ function robertochoa_load_scripts()
         }
 
         /*- SWIPER JS -*/
-        if (is_front_page(  )) {
-            //wp_register_script('swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), '7.0.5', true);
-            //wp_enqueue_script('swiper-js');
-        }
+        wp_register_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js', array(), '10.0.4', true);
+        wp_enqueue_script('swiper-js');
 
         /*- MAIN FUNCTIONS -*/
         //wp_register_script('fontawesome', 'https://kit.fontawesome.com/23f130f841.js', array(), $version_remove, true);
         //wp_enqueue_script('fontawesome');
 
         /*- MAIN FUNCTIONS -*/
-        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.min.js', array(), $version_remove, true);
+        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.min.js', array('swiper-js'), $version_remove, true);
         wp_enqueue_script('main-functions');
 
         /*- MAIN FUNCTIONS -*/
