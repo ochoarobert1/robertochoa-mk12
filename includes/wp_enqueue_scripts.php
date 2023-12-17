@@ -46,9 +46,11 @@ function robertochoa_load_scripts()
         }
 
         /*- SWIPER JS -*/
+        /*
         wp_register_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js', array(), '10.0.4', true);
         wp_enqueue_script('swiper-js');
-
+        */
+        
         /*- MAIN FUNCTIONS -*/
         //wp_register_script('fontawesome', 'https://kit.fontawesome.com/23f130f841.js', array(), $version_remove, true);
         //wp_enqueue_script('fontawesome');

@@ -21,22 +21,6 @@ function robertochoaCustomLoad() {
         .setAttribute("style", "padding-top: 0px;");
     }
   });
-
-  const swiper = new Swiper(".swiper-success", {
-    slidesPerView: 4,
-    initialSlide: 4,
-    direction: "horizontal",
-    spaceBetween: 5,
-    speed: 5000,
-    loop: true,
-    loopedSlidesLimit: false,
-    autoplay: {
-      delay: 0,
-      waitForTransition: true,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: false,
-    },
-  });
 }
 
 document.addEventListener("DOMContentLoaded", robertochoaCustomLoad, false);
