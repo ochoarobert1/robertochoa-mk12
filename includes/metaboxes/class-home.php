@@ -270,6 +270,54 @@ if (!class_exists('customMetaboxesHome')) {
                 'desc'       => __('Ingrese la dirección URL del Boton en Portafolio', 'robertochoa'),
                 'type'       => 'text_url'
             ));
+
+            /* BLOG */
+            $cmb_home_blog = new_cmb2_box(array(
+                'id'            => parent::PREFIX . 'home_blog_metabox',
+                'title'         => esc_html__('Blog', 'robertochoa'),
+                'object_types'  => array('page'),
+                'show_on'       => array('key' => 'page-template', 'value' => 'templates/page-home.php'),
+                'context'    => 'normal',
+                'priority'   => 'high',
+                'classes'    => 'extra-cmb2-class'
+            ));
+
+            $cmb_home_blog->add_field(array(
+                'id'         => parent::PREFIX . 'home_blog_title',
+                'name'       => __('Título de la sección', 'robertochoa'),
+                'desc'       => __('Ingrese el Título de la sección', 'robertochoa'),
+                'type'       => 'text'
+            ));
+
+            $cmb_home_blog->add_field(array(
+                'id'            => parent::PREFIX . 'home_blog_desc',
+                'name'       => __('Descripción de la sección', 'robertochoa'),
+                'desc'       => __('Ingrese la descripcion de la seccion', 'robertochoa'),
+                'type'       => 'wysiwyg',
+                'options' => array(
+                    'wpautop' => true,
+                    'media_buttons' => true,
+                    'textarea_rows' => get_option('default_post_edit_rows', 4),
+                    'teeny' => true,
+                    'dfw' => false,
+                    'tinymce' => true,
+                    'quicktags' => true
+                )
+            ));
+
+            $cmb_home_blog->add_field(array(
+                'id'            => parent::PREFIX . 'home_blog_btn_text',
+                'name'       => __('Texto del Boton en Blog', 'robertochoa'),
+                'desc'       => __('Ingrese el Texto del Boton en Blog', 'robertochoa'),
+                'type'       => 'text'
+            ));
+
+            $cmb_home_blog->add_field(array(
+                'id'            => parent::PREFIX . 'home_blog_btn_url',
+                'name'       => __('URL del Boton en Blog', 'robertochoa'),
+                'desc'       => __('Ingrese la dirección URL del Boton en Blog', 'robertochoa'),
+                'type'       => 'text_url'
+            ));
         }
     }
 
