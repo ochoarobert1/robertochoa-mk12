@@ -38,10 +38,12 @@ function robertochoa_load_styles()
       
 
         /*- SWIPER JS -*/
+        /*
         if (is_front_page()) {
             wp_register_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css', false, '10.0.4', 'all');
             wp_enqueue_style('swiper-css');
         }
+        */
 
         /*- GOOGLE FONTS -*/
         wp_register_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap', false, $version_remove, 'all');

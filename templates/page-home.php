@@ -103,21 +103,43 @@
                 <?php $portfolio_title = ro_meta_value('ro_home_portfolio_title'); ?>
                 <h2><?php echo esc_html($portfolio_title); ?></h2>
             </header>
-            <div class="main-success-slider">
-                <?php $arr_portfolio = new WP_Query(['post_type' => 'casos', 'posts_per_page' => -1, 'orderby' => 'date', 'order' => 'ASC']); ?>
-                <?php if ($arr_portfolio->have_posts()) : ?>
-                    <div class="swiper swiper-success swiper-container-free-mode">
-                        <div class="swiper-wrapper">
-                            <?php while ($arr_portfolio->have_posts()) : $arr_portfolio->the_post(); ?>
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <div class="swiper-slide"><?php the_post_thumbnail('large', array('class' => 'response-class', 'itemprop' => 'image', 'loading' => 'lazy')); ?></div>
-                                <?php endif; ?>
-                            <?php endwhile; ?>
+            <?php $arr_portfolio = new WP_Query([
+                    'post_type' => 'casos',
+                    'posts_per_page' => -1,
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                    'tax_query' => [[
+                        'taxonomy' => 'categoria-casos',
+                        'field' => 'slug',
+                        'terms' => ['destacado']
+                    ]]
+                ]); ?>
+            <?php if ($arr_portfolio->have_posts()) : ?>
+            <div class="main-success-portfolio-container">
+                <?php while ($arr_portfolio->have_posts()) : $arr_portfolio->the_post(); ?>
+                <article id="<?php the_ID() ?>" class="main-success-portfolio-item">
+                    <picture>
+                        <?php the_post_thumbnail('full', ['class' => 'response-class']); ?>
+                    </picture>
+                    <header>
+                        <h3><?php the_title(); ?></h3>
+                        <div class="category-list">
+                            <?php $terms = get_the_terms(get_the_ID(), 'categoria-casos'); ?>
+                            <?php if ($terms) : ?>
+                                <?php foreach ($terms as $term) : ?>
+                                    <?php if ($term->name !== 'Destacado') : ?>
+                                        <a href="<?php echo esc_url(get_term_link($term)); ?>" class="category-item"><?php echo esc_html($term->name); ?></a>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
-                    </div>
-                <?php endif; ?>
-                <?php wp_reset_query(); ?>
+                        <a href="<?php the_permalink(); ?>" class="btn-portfolio"><?php _e('Ver Caso de Éxito', 'robertochoa'); ?></a>
+                    </header>
+                </article>
+                <?php endwhile; ?>
             </div>
+            <?php endif; ?>
+            <?php wp_reset_query(); ?>
             <div class="main-success-content-button" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
                 <?php $btn_link = ro_meta_value('ro_home_portfolio_btn_link'); ?>
                 <?php $btn_text = ro_meta_value('ro_home_portfolio_btn_text'); ?>
