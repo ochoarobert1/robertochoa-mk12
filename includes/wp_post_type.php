@@ -39,6 +39,7 @@ class RobertCustomPostMeta
         $columns['ro_cert_id'] = __('ID del Certificado', 'robertochoa');
         $columns['ro_cert_emisor'] = __('Emisor', 'robertochoa');
         $columns['ro_cert_date'] = __('Fecha de Emisión', 'robertochoa');
+        $columns['ro_cert_url'] = __('URL', 'robertochoa');
         $columns['date'] = __('Date', 'wordpress');
 
         return $columns;
@@ -58,8 +59,13 @@ class RobertCustomPostMeta
 
         if ($column == 'ro_cert_date') {
             $cert_date = get_post_meta($post_id, 'ro_cert_date', true);
-            $date = DateTime::createFromFormat("d/m/Y", $cert_date);
+            $date = DateTime::createFromFormat("Y-m-d", $cert_date);
             echo wp_kses_post(sprintf('<span>%s / %s</span>', $date->format("M"), $date->format("Y")));
+        }
+
+        if ($column == 'ro_cert_url') {
+            $cert_url = get_post_meta($post_id, 'ro_cert_url', true);
+            echo wp_kses_post(sprintf('<a href="%s" target="_blank">%s</a>', $cert_url, $cert_url));
         }
     }
 
