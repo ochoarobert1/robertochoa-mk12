@@ -19,6 +19,7 @@
        <?php get_template_part('templates/home/services'); ?>
        <?php get_template_part('templates/home/portfolio'); ?>
        <?php get_template_part('templates/home/blog'); ?>
+       <?php get_template_part('templates/home/contact'); ?>
     </div>
 </main>
 <?php get_footer(); ?>
