@@ -1,5 +1,5 @@
 <section class="main-success-container">
-	<header class="main-success-title">
+    <header class="main-success-title">
         <?php $portfolio_title = ro_meta_value('ro_home_portfolio_title'); ?>
         <h2><?php echo esc_html($portfolio_title); ?></h2>
     </header>
@@ -16,7 +16,8 @@
     ]); ?>
     <?php if ($arr_portfolio->have_posts()) : ?>
     <div class="main-success-portfolio-container">
-        <?php while ($arr_portfolio->have_posts()) : $arr_portfolio->the_post(); ?>
+        <?php while ($arr_portfolio->have_posts()) :
+            $arr_portfolio->the_post(); ?>
         <article id="<?php the_ID() ?>" class="main-success-portfolio-item">
             <picture>
                 <?php the_post_thumbnail('full', ['class' => 'response-class']); ?>
@@ -26,14 +27,17 @@
                 <div class="category-list">
                     <?php $terms = get_the_terms(get_the_ID(), 'categoria-casos'); ?>
                     <?php if ($terms) : ?>
-                    <?php foreach ($terms as $term) : ?>
-                    <?php if ($term->name !== 'Destacado') : ?>
-                        <a href="<?php echo esc_url(get_term_link($term)); ?>" class="category-item"><?php echo esc_html($term->name); ?></a>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
+                        <?php foreach ($terms as $item) : ?>
+                            <?php if ($item->name !== 'Destacado') : ?>
+                                <?php $item_link = (get_term_link($item) !== '') ? get_term_link($item) : ''; ?>
+                                <?php if ($item_link !== '') : ?>
+                                    <a href="<?php echo esc_url($item_link); ?>" class="category-item"><?php echo esc_html($item->name); ?></a>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
-                <a href="<?php the_permalink(); ?>" class="btn-portfolio"><?php _e('Ver Caso de Éxito', 'robertochoa'); ?></a>
+                <a href="<?php the_permalink(); ?>" class="btn-portfolio"><?php esc_html_e('Ver Caso de Éxito', 'robertochoa'); ?></a>
             </header>
         </article>
         <?php endwhile; ?>

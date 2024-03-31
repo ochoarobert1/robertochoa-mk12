@@ -8,14 +8,15 @@
     <div class="main-services-content">
         <?php $array_services = new WP_Query(['post_type' => 'services', 'posts_per_page' => -1, 'orderby' => 'menu_order', 'order' => 'ASC']); ?>
         <?php if ($array_services->have_posts()) : ?>
-        <?php while ($array_services->have_posts()) : $array_services->the_post(); ?>
+            <?php while ($array_services->have_posts()) :
+                $array_services->the_post(); ?>
             <article class="main-services-item">
                 <picture>
-                    <?php echo the_post_thumbnail('full', array('class' => 'response-class', 'itemprop' => 'image', 'loading' => 'lazy')); ?>
+                    <?php echo esc_html(the_post_thumbnail('full', array('class' => 'response-class', 'itemprop' => 'image', 'loading' => 'lazy'))); ?>
                 </picture>
                 <h3><?php echo esc_html(get_the_title()); ?></h3>
             </article>
-        <?php endwhile; ?>
+            <?php endwhile; ?>
         <?php endif; ?>
         <?php wp_reset_query(); ?>
     </div>
