@@ -93,7 +93,7 @@ if (!class_exists('customMetaboxesClass')) {
     }
 }
 
-new customMetaboxesClass;
+new customMetaboxesClass();
 
 /**
 * AUTOLOADER OF METABOXES CHILD CLASSES
@@ -101,15 +101,15 @@ new customMetaboxesClass;
 
 function cmb2_autoload_class()
 {
-    $directory = dirname(__FILE__). '/metaboxes';
+    $directory = dirname(__FILE__) . '/metaboxes';
     $scan = scandir($directory);
     unset($scan[0], $scan[1]); //unset . and ..
     foreach ($scan as $file) {
-        if (is_dir($directory."/".$file)) {
-            cmb2_autoload_class($directory."/".$file);
+        if (is_dir($directory . "/" . $file)) {
+            cmb2_autoload_class($directory . "/" . $file);
         } else {
             if (strpos($file, '.php') !== false) {
-                require_once($directory."/".$file);
+                require_once($directory . "/" . $file);
             }
         }
     }

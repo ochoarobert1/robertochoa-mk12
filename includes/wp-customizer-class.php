@@ -38,7 +38,7 @@ if (!class_exists('RO_Customizer')) {
             $wp_customize->add_control(
                 'email',
                 [
-                    'type'		 => 'email',
+                    'type'       => 'email',
                     'label'      => esc_attr__('Correo Electrónico', 'robertochoa'),
                     'description' => esc_html__('Ingrese el correo electrónico a mostrar.', 'robertochoa'),
                     'section'    => 'ro_contact_data',
@@ -59,7 +59,7 @@ if (!class_exists('RO_Customizer')) {
             $wp_customize->add_control(
                 'phone',
                 [
-                    'type'		 => 'text',
+                    'type'       => 'text',
                     'label'      => esc_attr__('Números Telefónicos', 'robertochoa'),
                     'description' => esc_html__('Ingrese los números telefónicos a mostrar, puede ingresarlos separados por comas.', 'robertochoa'),
                     'section'    => 'ro_contact_data',

@@ -22,7 +22,7 @@ class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
         $classes = array(
             'sub-menu',
             ($display_depth % 2 ? 'menu-odd' : 'menu-even'),
-            ($display_depth >=2 ? 'sub-sub-menu' : ''),
+            ($display_depth >= 2 ? 'sub-sub-menu' : ''),
             'menu-depth-' . $display_depth
         );
         $class_names = implode(' ', $classes);
@@ -50,7 +50,7 @@ class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
         // Depth-dependent classes.
         $depth_classes = array(
             ($depth == 0 ? 'main-menu-item' : 'sub-menu-item'),
-            ($depth >=2 ? 'sub-sub-menu-item' : ''),
+            ($depth >= 2 ? 'sub-sub-menu-item' : ''),
             ($depth % 2 ? 'menu-item-odd' : 'menu-item-even'),
             'menu-item-depth-' . $depth
         );
@@ -61,13 +61,13 @@ class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
         $class_names = esc_attr(implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item)));
     
         // Build HTML.
-        $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
+        $output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
     
         // Link attributes.
-        $attributes = ! empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) .'"' : ' title="' . esc_attr($item->title) .'"';
-        $attributes .= ! empty($item->target) ? ' target="' . esc_attr($item->target) .'"' : '';
-        $attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) .'"' : '';
-        $attributes .= ! empty($item->url) ? ' href="' . esc_attr($item->url) .'"' : '';
+        $attributes = ! empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : ' title="' . esc_attr($item->title) . '"';
+        $attributes .= ! empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+        $attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+        $attributes .= ! empty($item->url) ? ' href="' . esc_url($item->url) . '"' : '';
         $attributes .= ' itemprop="url" class=" menu-link ' . ($depth > 0 ? 'sub-menu-link' : 'main-menu-link') . '"';
     
         // Build HTML output and pass through the proper filter.

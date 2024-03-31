@@ -1,0 +1,23 @@
+{
+    "name": "rochoa/robertochoa-mk12-theme",
+    "description": "Robert Ochoa Theme version 12",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Robert Ochoa",
+            "email": "ochoa.robert1@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "automattic/vipwpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "phpcompatibility/phpcompatibility-wp": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
