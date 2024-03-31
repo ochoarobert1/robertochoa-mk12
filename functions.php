@@ -5,6 +5,11 @@
 -------------------------------------------------------------- */
 class RobertMainThemeClass
 {
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         add_action('init', [$this, 'main_functions']);
@@ -21,6 +26,11 @@ class RobertMainThemeClass
         }
     }
 
+    /**
+     * Method main_functions
+     *
+     * @return void
+     */
     public function main_functions()
     {
         load_theme_textdomain('robertochoa', get_template_directory() . '/languages');
@@ -60,12 +70,22 @@ class RobertMainThemeClass
         ));
     }
 
-    /* DISABLE WORDPRESS RSS FEEDS */
+    /**
+     * Method robertochoa_disable_feed
+     * DISABLE WORDPRESS RSS FEEDS
+     *
+     * @return void
+     */
     public function robertochoa_disable_feed()
     {
         wp_die(__('No hay RSS Feeds disponibles', 'robertochoa'));
     }
 
+    /**
+     * Method robertochoa_enqueue_jquery
+     *
+     * @return void
+     */
     public function robertochoa_enqueue_jquery()
     {
         if (!is_user_logged_in()) {
@@ -79,6 +99,13 @@ class RobertMainThemeClass
         remove_action('wp_print_styles', 'print_emoji_styles');
     }
 
+    /**
+     * Method cc_mime_types
+     *
+     * @param $mimes $mimes [array]
+     *
+     * @return void
+     */
     public function cc_mime_types($mimes)
     {
         $mimes['svg'] = 'image/svg+xml';
@@ -86,10 +113,38 @@ class RobertMainThemeClass
     }
 }
 
-new RobertMainThemeClass;
+new RobertMainThemeClass();
 
-require_once('includes/wp_enqueue_scripts.php');
-require_once('includes/wp_enqueue_styles.php');
-require_once('includes/wp_metabox_class.php');
-require_once('includes/wp_post_type.php');
-require_once('includes/wp_nav_walker.php');
+/**
+ * Method phone_formatter
+ *
+ * @param $phone $phone [string]
+ *
+ * @return void
+ */
+function phoneFormatter($phone)
+{
+    $formatted_number = preg_replace("[^0-9]", "", $phone);
+    $formatted_number = substr($formatted_number, 0, 3) . '-' . substr($formatted_number, 3, 3) . '-' . substr($formatted_number, 6);
+    return $formatted_number;
+}
+
+/**
+ * Method email_formatter
+ *
+ * @param $email $email [string]
+ *
+ * @return void
+ */
+function emailFormatter($email)
+{
+    $formatted_email = str_replace('@', '[at]', $email);
+    return $formatted_email;
+}
+
+require_once('includes/wp-enqueue-scripts.php');
+require_once('includes/wp-enqueue-styles.php');
+require_once('includes/wp-metabox-class.php');
+require_once('includes/wp-post-type.php');
+require_once('includes/wp-nav-walker.php');
+require_once('includes/wp-customizer-class.php');

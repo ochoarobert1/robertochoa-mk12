@@ -15,13 +15,32 @@ if (!defined('ABSPATH')) {
 if (!class_exists('customMetaboxesHome')) {
     class customMetaboxesHome extends customMetaboxesClass
     {
-
         /**
          * Main Constructor.
          */
         public function __construct()
         {
             add_action('cmb2_admin_init', array($this, 'robertochoa_register_custom_metabox'));
+        }
+
+        /**
+         * Method robertochoa_get_projects
+         *
+         * @return void
+         */
+        public function robertochoa_get_projects()
+        {
+            $projects_object = get_posts([
+                'post_type' => 'casos',
+                'posts_per_page' => -1
+            ]);
+            if (!is_wp_error($projects_object)) :
+                foreach ($projects_object as $project) {
+                    $array_projects[$project->ID] = $project->post_title;
+                }
+            endif;
+
+            return $array_projects;
         }
 
         /**
@@ -265,6 +284,14 @@ if (!class_exists('customMetaboxesHome')) {
             ));
 
             $cmb_home_portfolio->add_field(array(
+                'id'         => parent::PREFIX . 'home_portfolio_selected',
+                'name'       => __('Casos seleccionados a mostrar', 'robertochoa'),
+                'desc'       => __('Seleccione los casos a mostrar en el inicio', 'robertochoa'),
+                'type'       => 'pw_multiselect',
+                'options'    => $this->robertochoa_get_projects()
+            ));
+
+            $cmb_home_portfolio->add_field(array(
                 'id'            => parent::PREFIX . 'home_portfolio_btn_url',
                 'name'       => __('URL del Boton en Portafolio', 'robertochoa'),
                 'desc'       => __('Ingrese la dirección URL del Boton en Portafolio', 'robertochoa'),
@@ -318,8 +345,58 @@ if (!class_exists('customMetaboxesHome')) {
                 'desc'       => __('Ingrese la dirección URL del Boton en Blog', 'robertochoa'),
                 'type'       => 'text_url'
             ));
+
+            /* CONTACT */
+            $cmb_home_contact = new_cmb2_box(array(
+                'id'            => parent::PREFIX . 'home_contact_metabox',
+                'title'         => esc_html__('Contacto', 'robertochoa'),
+                'object_types'  => array('page'),
+                'show_on'       => array('key' => 'page-template', 'value' => 'templates/page-home.php'),
+                'context'    => 'normal',
+                'priority'   => 'high',
+                'classes'    => 'extra-cmb2-class'
+            ));
+
+            $cmb_home_contact->add_field(array(
+                'id'         => parent::PREFIX . 'home_contact_title',
+                'name'       => __('Título de la sección', 'robertochoa'),
+                'desc'       => __('Ingrese el Título de la sección', 'robertochoa'),
+                'type'       => 'text'
+            ));
+
+            $cmb_home_contact->add_field(array(
+                'id'            => parent::PREFIX . 'home_contact_desc',
+                'name'       => __('Descripción de la sección', 'robertochoa'),
+                'desc'       => __('Ingrese la descripcion de la seccion', 'robertochoa'),
+                'type'       => 'wysiwyg',
+                'options' => array(
+                    'wpautop' => true,
+                    'media_buttons' => true,
+                    'textarea_rows' => get_option('default_post_edit_rows', 4),
+                    'teeny' => true,
+                    'dfw' => false,
+                    'tinymce' => true,
+                    'quicktags' => true
+                )
+            ));
+
+            $cmb_home_contact->add_field(array(
+                'id'            => parent::PREFIX . 'home_contact_data_desc',
+                'name'       => __('Descripción del bloque de datos de contacto', 'robertochoa'),
+                'desc'       => __('Ingrese la descripcion del bloque', 'robertochoa'),
+                'type'       => 'wysiwyg',
+                'options' => array(
+                    'wpautop' => true,
+                    'media_buttons' => true,
+                    'textarea_rows' => get_option('default_post_edit_rows', 4),
+                    'teeny' => true,
+                    'dfw' => false,
+                    'tinymce' => true,
+                    'quicktags' => true
+                )
+            ));
         }
     }
 
-    new customMetaboxesHome;
+    new customMetaboxesHome();
 }
