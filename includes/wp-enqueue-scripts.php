@@ -9,11 +9,11 @@ function robertochoa_load_scripts()
     $version_remove = null;
     if (!is_admin()) {
         /*- MAIN FUNCTIONS -*/
-        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.min.js', array('swiper-js'), $version_remove, true);
+        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.min.js', [], $version_remove, true);
         wp_enqueue_script('main-functions');
 
         /*- MAIN FUNCTIONS -*/
-        wp_register_script('lottie-functions', 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js', array(), $version_remove, true);
+        wp_register_script('lottie-functions', 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js', [], $version_remove, true);
         wp_enqueue_script('lottie-functions');
 
         /* LOCALIZE MAIN SHORTCODE SCRIPT */
