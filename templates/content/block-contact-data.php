@@ -22,7 +22,7 @@ if (!empty($contact_data)) : ?>
                     <img src="<?php echo esc_url(get_template_directory_uri()) . '/images/phone.svg'; ?>" height="25" width="25" alt="Phone Icon" />
                 </div>
                 <div class="contact-data-item-content">
-                    <a href="tel:<?php echo esc_url(esc_attr($phone)); ?>"><?php echo esc_html(phoneFormatter(trim($phone))); ?></a>
+                    <a href="<?php echo esc_url('tel:' . esc_attr($phone)); ?>"><?php echo esc_html(phoneFormatter(trim($phone))); ?></a>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -34,7 +34,7 @@ if (!empty($contact_data)) : ?>
             <img src="<?php echo esc_url(get_template_directory_uri()) . '/images/email.svg'; ?>" height="25" width="25" alt="Phone Icon" />
             </div>
             <div class="contact-data-item-content">
-                <a href="mailto:<?php echo esc_url($contact_data['email']); ?>"><?php echo esc_html(emailFormatter($contact_data['email'])); ?></a>
+                <a href="<?php echo esc_url('mailto:' . $contact_data['email']); ?>"><?php echo esc_html(emailFormatter($contact_data['email'])); ?></a>
             </div>
         </div>
         <div class="contact-data-item">
