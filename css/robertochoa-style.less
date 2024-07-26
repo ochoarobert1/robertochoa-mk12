@@ -302,6 +302,176 @@ a {
 /* --------------------------------------------------------------
 2.- FOOTER
 -------------------------------------------------------------- */
+.footer-section {
+    background: black;
+    color: white;
+    padding: 3rem 1rem 0;
+
+    .footer-wrapper {
+        margin: 0 auto;
+        max-width: 90%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 4px;
+
+        .footer-item {
+            flex: 0 0 21%;
+            max-width: 21%;
+            margin-bottom: 2rem;
+
+            &:first-child {
+                flex: 0 0 8%;
+                max-width: 8%;
+            }
+
+            @media screen and (max-width: 991px) {
+                flex: 0 0 24%;
+                max-width: 24%;
+
+                &:first-child {
+                    flex: 0 0 10%;
+                    max-width: 10%;
+                }
+
+                &:nth-child(5) {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 767px) {
+                flex: 0 0 100%;
+                max-width: 100%;
+
+                &:first-child {
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+            }
+
+            h3,
+            .widget-title {
+                margin-top: 0;
+            }
+
+            .widget_text p {
+                font-size: 1rem;
+                font-weight: 300;
+                line-height: 1.4rem;
+            }
+
+            .menu {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                align-items: flex-start;
+                flex-flow: column;
+                gap: 10px;
+                font-weight: 300;
+
+                li {
+                    a {
+                        color: #FFF;
+
+                        &:hover {
+                            color: #E0040B;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-wide {
+            padding-top: 3rem;
+            flex: 0 0 100%;
+            max-width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+.mc4wp-form-fields {
+    .form-control {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-flow: column;
+
+        label {
+            flex: 0 0 100%;
+            max-width: 100%;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=tel] {
+            width: 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 5px;
+            font-size: 0.8rem;
+            border: 0;
+
+            &:focus {
+                outline: 1px solid #005cc8;
+            }
+        }
+
+        input[type=submit] {
+            cursor: pointer;
+            background: @hred;
+            color: @white;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 4px;
+            padding: 1rem 2rem;
+            margin-top: .8rem;
+            border: 0;
+            width: 100%;
+            .transition(all .3s ease-in-out);
+
+            @media screen and (max-width:1440px) {
+                letter-spacing: 2px;
+                padding: 1rem 0.5rem;
+            }
+
+            @media screen and (max-width:1170px) {
+                font-size: 0.8rem;
+                letter-spacing: 0;
+            }
+
+            @media screen and (max-width:991px) {
+                letter-spacing: 4px;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            @media screen and (max-width:414px) {
+                font-size: 0.8rem;
+                letter-spacing: 0;
+                padding: 1rem 0;
+            }
+
+            &:hover {
+                background: @sblack;
+                color: @white;
+            }
+        }
+    }
+
+    .small-message {
+        margin-top: 10px;
+    }
+}
 
 /* --------------------------------------------------------------
 3.- HOME

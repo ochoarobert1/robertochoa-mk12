@@ -27,6 +27,7 @@ class RobertMainThemeClass
         add_action('do_feed_rss2', [$this, 'disableFeed'], 1);
         add_action('do_feed_atom', [$this, 'disableFeed'], 1);
         add_filter('upload_mimes', [$this, 'addMimeTypes']);
+        add_action('customize_register', [$this, 'customizeSection']);
 
         if (!is_admin()) {
             add_action('wp_enqueue_scripts', [$this, 'enqueueJquery']);
@@ -58,11 +59,15 @@ class RobertMainThemeClass
             )
         );
 
+
         add_theme_support('custom-logo', array(
-            'height'      => 250,
-            'width'       => 250,
-            'flex-width'  => true,
-            'flex-height' => true,
+            'height'      => 70,
+            'width'       => 57,
+            'flex-width'  => false,
+            'flex-height' => false,
+            'header-text' => array( 'site-title', 'site-description' ),
+            'unlink-homepage-logo' => true,
+            'class' => 'logo'
         ));
 
         add_theme_support('html5', array(
@@ -77,6 +82,15 @@ class RobertMainThemeClass
             'header_menu' => esc_attr__('Menu Header', 'robertochoa'),
             'footer_menu' => esc_attr__('Menu Footer', 'robertochoa'),
         ));
+
+        register_sidebars(5, [
+            'name'          => esc_attr__('Footer Sidebar %d', 'robertochoa'),
+            'id'            => 'footer-sidebar',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        ]);
     }
 
     /**
@@ -120,6 +134,40 @@ class RobertMainThemeClass
         $mimes['svg'] = 'image/svg+xml';
         return $mimes;
     }
+
+    /**
+     * Method customizeSection
+     *
+     * @param $wp_customize $wp_customize [explicite description]
+     *
+     * @return void
+     */
+    public function customizeSection($wp_customize)
+    {
+        $wp_customize->add_setting('white_logo');
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'white_logo', array(
+            'label' => esc_html__('Logo Blanco', 'robertochoa'),
+            'section' => 'title_tagline',
+            'settings' => 'white_logo',
+            'priority' => 8
+        )));
+
+        //add footer section
+        $wp_customize->add_section('footer', array(
+            'title'    => esc_html__('Footer', 'robertochoa'),
+            'priority' => 10,
+        ));
+
+        //add copyright setting
+        $wp_customize->add_setting('footer_copyright');
+        $wp_customize->add_control('footer_copyright', array(
+            'type'     => 'text',
+            'label'    => esc_html__('Texto Copyright', 'robertochoa'),
+            'section'  => 'footer',
+            'settings' => 'footer_copyright'
+        ));
+    }
+
 }
 
 new RobertMainThemeClass();
