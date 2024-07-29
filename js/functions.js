@@ -28,5 +28,7 @@ document.addEventListener("DOMContentLoaded", robertochoaCustomLoad, false);
 document.getElementById("hamburger").addEventListener("click", (e) => {
   e.preventDefault();
   document.getElementById("hamburger").classList.toggle("open");
-  document.getElementById("menu-main-menu").classList.toggle("open-menu");
+  document
+    .getElementById("mobileMenu")
+    .classList.toggle("mobile-menu-container-open");
 });
