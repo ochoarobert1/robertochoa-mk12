@@ -21,6 +21,15 @@ function robertochoaCustomLoad() {
         .setAttribute("style", "padding-top: 0px;");
     }
   });
+  window.addEventListener("resize", (e) => {
+    var currHeaderWidth = document.getElementById("mainHeader").clientWidth;
+    if (currHeaderWidth > 768) {
+      document
+        .getElementById("mobileMenu")
+        .classList.remove("mobile-menu-container-open");
+      document.getElementById("hamburger").classList.remove("open");
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", robertochoaCustomLoad, false);
