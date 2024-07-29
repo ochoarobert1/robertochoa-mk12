@@ -24,6 +24,15 @@
         </a>
     </div>
     <nav id="menuCnt" class="header-menu" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <?php wp_nav_menu(array( 'theme_location' => 'header_menu', 'depth' => 2, 'container' => 'div', 'walker' => new bigrush_Walker_Nav_Menu() )); ?>
+        <?php wp_nav_menu(array( 'theme_location' => 'header_menu', 'depth' => 2, 'container' => 'div', 'walker' => new RO_Walker_Nav_Menu() )); ?>
     </nav>
+    <div id="mobileMenu" class="mobile-menu-container">
+      <div class="mobile-menu-wrapper">
+        <nav class="mobile-menu-content" itemscope itemtype="http://schema.org/SiteNavigationElement">
+          <?php wp_nav_menu(array( 'theme_location' => 'header_menu', 'depth' => 2, 'container' => 'div', 'walker' => new RO_Walker_Nav_Menu() )); ?>
+          <?php get_template_part('templates/content/block-mobile-extend'); ?>
+        </nav>
+        <?php get_template_part('templates/content/block-social-icons'); ?>
+      </div>
+    </div>
 </header>

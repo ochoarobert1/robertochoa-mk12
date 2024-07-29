@@ -220,6 +220,211 @@ a {
   }
 }
 
+.mobile-menu-container {
+  width: 100%;
+  min-height: 90vh;
+  position: fixed;
+  top: -150%;
+  left: 0;
+  z-index: 9999;
+  background: white;
+  padding: 1rem 2rem;
+
+  .mobile-menu-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-flow: column;
+    height: 78vh;
+
+    .social-icons-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      @media screen and (max-width: 533px) {
+        flex-wrap: wrap;
+        gap: 20px;
+
+        a {
+          flex: 0 0 19%;
+          text-align: center;
+        }
+      }
+    }
+
+    .mobile-extend {
+      margin: 2rem 0;
+
+      .contact-data-item {
+        .display(flex);
+        .align-items(center);
+        .justify-content(flex-start);
+        flex-wrap: wrap;
+
+        h4 {
+          .flex(0 0 100%);
+          margin: 1rem 0;
+        }
+
+        .contact-data-phone-item {
+          .flex(0 0 100%);
+          .display(flex);
+          .align-items(center);
+          .justify-content(flex-start);
+          margin-bottom: 0.5rem;
+        }
+
+        .contact-data-item-icon {
+          .flex(0 0 35px);
+        }
+
+        .contact-data-item-content {
+          .flex(0 0 80%);
+
+          a {
+            color: @black;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .mobile-menu-content {
+      .menu {
+        .display(flex);
+        .align-items(flex-start);
+        .justify-content(flex-start);
+        flex-flow: column;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        & .menu-item {
+          padding: 10px 0;
+          position: relative;
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 0;
+            width: 2px;
+            height: 6px;
+            opacity: 0;
+            background: @hred;
+            .transition(all 0.3s ease-in-out);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0px;
+            width: 6px;
+            height: 2px;
+            opacity: 0;
+            background: @hred;
+            .transition(all 0.3s ease-in-out);
+          }
+
+          &:hover::before {
+            top: 84%;
+          }
+
+          &:hover::after {
+            .calc(right, ~"100% - 6px");
+          }
+
+          &:hover::after,
+          &:hover::before {
+            opacity: 1;
+          }
+
+          & a {
+            color: @sblack;
+            border-bottom: 2px solid transparent;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            .transition(all 0.2s ease-in-out);
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 10px;
+              right: 0px;
+              width: 6px;
+              height: 2px;
+              opacity: 0;
+              background: @hred;
+              .transition(all 0.3s ease-in-out);
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 10px;
+              right: 0px;
+              width: 6px;
+              height: 2px;
+              opacity: 0;
+              background: @hred;
+              .transition(all 0.3s ease-in-out);
+            }
+
+            &:hover {
+              opacity: 0.8;
+            }
+
+            &:hover::after,
+            &:hover::before {
+              opacity: 1;
+            }
+
+            &:hover::before {
+              top: 2px;
+              left: -2px;
+              transform: rotate(90deg);
+            }
+
+            &:hover::after {
+              top: unset;
+              bottom: 0px;
+              .calc(left, ~"100% - 6px");
+            }
+          }
+        }
+
+        & .current-menu-item {
+          &::before,
+          &::after {
+            display: none;
+          }
+
+          & a {
+            color: @black;
+            opacity: 0.8;
+            border-color: @hred;
+
+            &::before,
+            &::after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-menu-container-open {
+  top: 14%;
+}
+
 .header-phone {
   font-size: 1.5rem;
 
@@ -295,6 +500,10 @@ a {
   left: 0;
   z-index: 9999;
   box-shadow: 0 0 10px #cecece;
+
+  .mobile-menu-container-open {
+    top: 10%;
+  }
 }
 
 /* --------------------------------------------------------------
