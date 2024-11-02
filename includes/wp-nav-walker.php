@@ -1,9 +1,20 @@
 <?php
 
 /**
-* Custom walker class.
+* Custom Walker Nav Menu
+*
+* @package RobertOchoa
+* @subpackage robertochoa-mk12-theme
+* @since Mk.12
 */
-class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
+
+if (! defined('ABSPATH')) {
+    exit;
+}
+/**
+ * RO_Walker_Nav_Menu
+ */
+class RO_Walker_Nav_Menu extends Walker_Nav_Menu
 {
     /**
     * Starts the list before the elements are added.
@@ -22,15 +33,15 @@ class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
         $classes = array(
             'sub-menu',
             ($display_depth % 2 ? 'menu-odd' : 'menu-even'),
-            ($display_depth >=2 ? 'sub-sub-menu' : ''),
+            ($display_depth >= 2 ? 'sub-sub-menu' : ''),
             'menu-depth-' . $display_depth
         );
         $class_names = implode(' ', $classes);
-    
+
         // Build HTML for output.
         $output .= "\n" . $indent . '<ul class="' . $class_names . '">' . "\n";
     }
-    
+
     /**
     * Start the element output.
     *
@@ -46,30 +57,30 @@ class bigrush_Walker_Nav_Menu extends Walker_Nav_Menu
     {
         global $wp_query;
         $indent = ($depth > 0 ? str_repeat("\t", $depth) : ''); // code indent
-    
+
         // Depth-dependent classes.
         $depth_classes = array(
             ($depth == 0 ? 'main-menu-item' : 'sub-menu-item'),
-            ($depth >=2 ? 'sub-sub-menu-item' : ''),
+            ($depth >= 2 ? 'sub-sub-menu-item' : ''),
             ($depth % 2 ? 'menu-item-odd' : 'menu-item-even'),
             'menu-item-depth-' . $depth
         );
         $depth_class_names = esc_attr(implode(' ', $depth_classes));
-    
+
         // Passed classes.
         $classes = empty($item->classes) ? array() : (array) $item->classes;
         $class_names = esc_attr(implode(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item)));
-    
+
         // Build HTML.
-        $output .= $indent . '<li id="nav-menu-item-'. $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
-    
+        $output .= $indent . '<li id="nav-menu-item-' . $item->ID . '" class="' . $depth_class_names . ' ' . $class_names . '">';
+
         // Link attributes.
-        $attributes = ! empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) .'"' : ' title="' . esc_attr($item->title) .'"';
-        $attributes .= ! empty($item->target) ? ' target="' . esc_attr($item->target) .'"' : '';
-        $attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) .'"' : '';
-        $attributes .= ! empty($item->url) ? ' href="' . esc_attr($item->url) .'"' : '';
+        $attributes = ! empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : ' title="' . esc_attr($item->title) . '"';
+        $attributes .= ! empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+        $attributes .= ! empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+        $attributes .= ! empty($item->url) ? ' href="' . esc_url($item->url) . '"' : '';
         $attributes .= ' itemprop="url" class=" menu-link ' . ($depth > 0 ? 'sub-menu-link' : 'main-menu-link') . '"';
-    
+
         // Build HTML output and pass through the proper filter.
         $item_output = sprintf(
             '%1$s<a%2$s><span itemprop="name">%3$s%4$s%5$s</span></a>%6$s',

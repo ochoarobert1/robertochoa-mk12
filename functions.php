@@ -1,30 +1,51 @@
 <?php
 
-/* --------------------------------------------------------------
-    ADD THEME SUPPORT
--------------------------------------------------------------- */
+/**
+ * Main Functions and class for theme
+ *
+ * @package    robertochoa-mk12-theme
+ * @subpackage robertochoa-mk12-theme
+ * @author     Robert Ochoa <ochoa.robert1@gmail.com>
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+/**
+ * RobertMainThemeClass
+ */
 class RobertMainThemeClass
 {
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
-        add_action('init', [$this, 'main_functions']);
-        add_action('do_feed', [$this, 'robertochoa_disable_feed'], 1);
-        add_action('do_feed_rdf', [$this, 'robertochoa_disable_feed'], 1);
-        add_action('do_feed_rss', [$this, 'robertochoa_disable_feed'], 1);
-        add_action('do_feed_rss2', [$this, 'robertochoa_disable_feed'], 1);
-        add_action('do_feed_atom', [$this, 'robertochoa_disable_feed'], 1);
-
-        add_filter('upload_mimes', [$this, 'cc_mime_types']);
+        add_action('init', [$this, 'mainFunctions']);
+        add_action('do_feed', [$this, 'disableFeed'], 1);
+        add_action('do_feed_rdf', [$this, 'disableFeed'], 1);
+        add_action('do_feed_rss', [$this, 'disableFeed'], 1);
+        add_action('do_feed_rss2', [$this, 'disableFeed'], 1);
+        add_action('do_feed_atom', [$this, 'disableFeed'], 1);
+        add_filter('upload_mimes', [$this, 'addMimeTypes']);
+        add_action('customize_register', [$this, 'customizeSection']);
 
         if (!is_admin()) {
-            add_action('wp_enqueue_scripts', [$this, 'robertochoa_enqueue_jquery']);
+            add_action('wp_enqueue_scripts', [$this, 'enqueueJquery']);
         }
     }
 
-    public function main_functions()
+    /**
+     * Method mainFunctions
+     *
+     * @return void
+     */
+    public function mainFunctions()
     {
         load_theme_textdomain('robertochoa', get_template_directory() . '/languages');
-        add_theme_support('post-formats', array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio'));
+        add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio']);
         add_theme_support('post-thumbnails');
         add_theme_support('automatic-feed-links');
         add_theme_support('title-tag');
@@ -32,41 +53,65 @@ class RobertMainThemeClass
         add_theme_support('customize-selective-refresh-widgets');
         add_theme_support(
             'custom-background',
-            array(
+            [
                 'default-image' => '',
                 'default-color' => 'ffffff',
                 'wp-head-callback' => '_custom_background_cb',
                 'admin-head-callback' => '',
                 'admin-preview-callback' => ''
-            )
+            ]
         );
-        add_theme_support('custom-logo', array(
-            'height'      => 250,
-            'width'       => 250,
-            'flex-width'  => true,
-            'flex-height' => true,
-        ));
-        add_theme_support('html5', array(
+
+        add_theme_support('custom-logo', [
+            'height'      => 70,
+            'width'       => 57,
+            'flex-width'  => false,
+            'flex-height' => false,
+            'header-text' => ['site-title', 'site-description'],
+            'unlink-homepage-logo' => true,
+            'class' => 'logo'
+        ]);
+
+        add_theme_support('html5', [
             'search-form',
             'comment-form',
             'comment-list',
             'gallery',
             'caption',
-        ));
+        ]);
 
-        register_nav_menus(array(
-            'header_menu' => __('Menu Header', 'robertochoa'),
-            'footer_menu' => __('Menu Footer', 'robertochoa'),
-        ));
+        register_nav_menus([
+            'header_menu' => esc_attr__('Menu Header', 'robertochoa'),
+            'footer_menu' => esc_attr__('Menu Footer', 'robertochoa'),
+        ]);
+
+        register_sidebars(5, [
+            'name'          => esc_attr__('Footer Sidebar %d', 'robertochoa'),
+            'id'            => 'footer-sidebar',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        ]);
     }
 
-    /* DISABLE WORDPRESS RSS FEEDS */
-    public function robertochoa_disable_feed()
+    /**
+     * Method disableFeed
+     * DISABLE WORDPRESS RSS FEEDS
+     *
+     * @return void
+     */
+    public function disableFeed()
     {
-        wp_die(__('No hay RSS Feeds disponibles', 'robertochoa'));
+        wp_die(esc_html__('No hay RSS Feeds disponibles', 'robertochoa'));
     }
 
-    public function robertochoa_enqueue_jquery()
+    /**
+     * Method enqueueJquery
+     *
+     * @return void
+     */
+    public function enqueueJquery()
     {
         if (!is_user_logged_in()) {
             wp_deregister_script('jquery');
@@ -79,17 +124,57 @@ class RobertMainThemeClass
         remove_action('wp_print_styles', 'print_emoji_styles');
     }
 
-    public function cc_mime_types($mimes)
+    /**
+     * Method addMimeTypes
+     *
+     * @param $mimes $mimes [array]
+     *
+     * @return void
+     */
+    public function addMimeTypes($mimes)
     {
         $mimes['svg'] = 'image/svg+xml';
         return $mimes;
     }
+
+    /**
+     * Method customizeSection
+     *
+     * @param $wp_customize [object]
+     *
+     * @return void
+     */
+    public function customizeSection($wp_customize)
+    {
+        $wp_customize->add_setting('white_logo');
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'white_logo', [
+            'label' => esc_html__('Logo Blanco', 'robertochoa'),
+            'section' => 'title_tagline',
+            'settings' => 'white_logo',
+            'priority' => 8
+        ]));
+
+        $wp_customize->add_section('footer', [
+            'title'    => esc_html__('Footer', 'robertochoa'),
+            'priority' => 10,
+        ]);
+
+        $wp_customize->add_setting('footer_copyright');
+        $wp_customize->add_control('footer_copyright', [
+            'type'     => 'text',
+            'label'    => esc_html__('Texto Copyright', 'robertochoa'),
+            'section'  => 'footer',
+            'settings' => 'footer_copyright'
+        ]);
+    }
 }
 
-new RobertMainThemeClass;
+new RobertMainThemeClass();
 
-require_once('includes/wp_enqueue_scripts.php');
-require_once('includes/wp_enqueue_styles.php');
-require_once('includes/wp_metabox_class.php');
-require_once('includes/wp_post_type.php');
-require_once('includes/wp_nav_walker.php');
+require_once('includes/wp-helpers.php');
+require_once('includes/wp-enqueue-scripts.php');
+require_once('includes/wp-enqueue-styles.php');
+require_once('includes/wp-metabox-class.php');
+require_once('includes/wp-post-type.php');
+require_once('includes/wp-nav-walker.php');
+require_once('includes/wp-customizer-class.php');

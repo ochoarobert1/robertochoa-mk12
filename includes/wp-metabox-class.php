@@ -1,29 +1,29 @@
 <?php
 
 /**
-* CMB2 Custom Metaboxes
-*
-* @package RobertOchoa
-* @subpackage robertochoa-mk12-theme
-* @since Mk.12
-*/
+ * CMB2 Custom Metaboxes
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
 
 if (! defined('ABSPATH')) {
     exit;
 }
 
-if (!class_exists('customMetaboxesClass')) {
-    class customMetaboxesClass
+if (!class_exists('ROMetaboxesClass')) {
+    class ROMetaboxesClass
     {
         const PREFIX = 'ro_';
 
         /**
-        * Main Constructor.
-        */
+         * Main Constructor.
+         */
         public function __construct()
         {
-            add_filter('cmb2_show_on', array($this, 'ed_metabox_include_front_page'), 10, 2);
-            add_filter('cmb2_show_on', array($this, 'be_metabox_show_on_slug'), 10, 2);
+            add_filter('cmb2_show_on', [$this, 'ed_metabox_include_front_page'], 10, 2);
+            add_filter('cmb2_show_on', [$this, 'be_metabox_show_on_slug'], 10, 2);
         }
 
         /**
@@ -31,6 +31,7 @@ if (!class_exists('customMetaboxesClass')) {
          */
         public function ed_metabox_include_front_page($display, $meta_box)
         {
+            // phpcs:disable WordPress.Security.NonceVerification.Missing
             if (!isset($meta_box['show_on']['key'])) {
                 return $display;
             }
@@ -57,6 +58,7 @@ if (!class_exists('customMetaboxesClass')) {
 
             // there is a front page set and we're on it!
             return $post_id == $front_page;
+            // phpcs:enable WordPress.Security.NonceVerification.Missing
         }
 
         /**
@@ -64,6 +66,7 @@ if (!class_exists('customMetaboxesClass')) {
          */
         public function be_metabox_show_on_slug($display, $meta_box)
         {
+            // phpcs:disable WordPress.Security.NonceVerification.Missing
             if (!isset($meta_box['show_on']['key'], $meta_box['show_on']['value'])) {
                 return $display;
             }
@@ -89,40 +92,34 @@ if (!class_exists('customMetaboxesClass')) {
 
             // See if there's a match
             return in_array($slug, (array) $meta_box['show_on']['value']);
+            // phpcs:enable WordPress.Security.NonceVerification.Missing
         }
     }
 }
 
-new customMetaboxesClass;
+new ROMetaboxesClass();
 
 /**
-* AUTOLOADER OF METABOXES CHILD CLASSES
-*/
-
-function cmb2_autoload_class()
+ * Method cmb2_autoload_class
+ * Autoloader of Metabox Child Classes
+ *
+ * @param string $directory
+ *
+ * @return void
+ */
+function cmb2_autoload_class($directory)
 {
-    $directory = dirname(__FILE__). '/metaboxes';
     $scan = scandir($directory);
-    unset($scan[0], $scan[1]); //unset . and ..
+    unset($scan[0], $scan[1]);
     foreach ($scan as $file) {
-        if (is_dir($directory."/".$file)) {
-            cmb2_autoload_class($directory."/".$file);
+        if (is_dir($directory . "/" . $file)) {
+            cmb2_autoload_class($directory . "/" . $file);
         } else {
             if (strpos($file, '.php') !== false) {
-                require_once($directory."/".$file);
+                require_once($directory . "/" . $file);
             }
         }
     }
 }
 
-cmb2_autoload_class();
-
-/**
-* WRAPPER FOR GET_POST_META
-*/
-
-function ro_meta_value($meta_name)
-{
-    $result = get_post_meta(get_the_ID(), $meta_name, true);
-    return $result;
-}
+cmb2_autoload_class(dirname(__FILE__) . '/metaboxes');
