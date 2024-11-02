@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Custom Post Type Class
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
 if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 
-class RobertCustomPostMeta
+/**
+ * ROCustomPostType
+ */
+class ROCustomPostType
 {
     /**
      * Method __construct
@@ -13,7 +24,7 @@ class RobertCustomPostMeta
      */
     public function __construct()
     {
-        add_action('init', [$this, 'custom_post_type'], 0);
+        add_action('init', [$this, 'custom_casos_cpt'], 0);
         add_action('init', [$this, 'custom_casos_category_taxonomy'], 0);
         add_action('init', [$this, 'custom_casos_technology_taxonomy'], 0);
         add_action('init', [$this, 'custom_services_cpt'], 0);
@@ -28,23 +39,31 @@ class RobertCustomPostMeta
     /**
      * Method add_cert_custom_columns
      *
-     * @param $columns $columns [explicite description]
+     * @param $columns [array]
      *
-     * @return void
+     * @return [array]
      */
     public function add_cert_custom_columns($columns)
     {
 
         unset($columns['date']);
-        $columns['ro_cert_id'] = __('ID del Certificado', 'robertochoa');
-        $columns['ro_cert_emisor'] = __('Emisor', 'robertochoa');
-        $columns['ro_cert_date'] = __('Fecha de Emisión', 'robertochoa');
-        $columns['ro_cert_url'] = __('URL', 'robertochoa');
-        $columns['date'] = __('Date', 'wordpress');
+        $columns['ro_cert_id'] = esc_html__('ID del Certificado', 'robertochoa');
+        $columns['ro_cert_emisor'] = esc_html__('Emisor', 'robertochoa');
+        $columns['ro_cert_date'] = esc_html__('Fecha de Emisión', 'robertochoa');
+        $columns['ro_cert_url'] = esc_html__('URL', 'robertochoa');
+        $columns['date'] = esc_html__('Date', 'wordpress');
 
         return $columns;
     }
 
+    /**
+     * Method custom_cert_columns_data
+     *
+     * @param $column [array]
+     * @param $post_id [string]
+     *
+     * @return void
+     */
     public function custom_cert_columns_data($column, $post_id)
     {
         if ($column == 'ro_cert_id') {
@@ -72,16 +91,15 @@ class RobertCustomPostMeta
     /**
      * Method add_custom_columns
      *
-     * @param $columns [explicite description]
+     * @param $columns [array]
      *
-     * @return void
+     * @return [array]
      */
     public function add_custom_columns($columns)
     {
-
         unset($columns['date']);
-        $columns['thumbnail'] = __('Thumbnail', 'robertochoa');
-        $columns['date'] = __('Date', 'wordpress');
+        $columns['thumbnail'] = esc_html__('Thumbnail', 'robertochoa');
+        $columns['date'] = esc_html__('Date', domain: 'robertochoa');
 
         return $columns;
     }
@@ -89,8 +107,8 @@ class RobertCustomPostMeta
     /**
      * Method custom_columns_data
      *
-     * @param $column [explicite description]
-     * @param $post_id [explicite description]
+     * @param $column [array]
+     * @param $post_id [string]
      *
      * @return void
      */
@@ -105,7 +123,7 @@ class RobertCustomPostMeta
     /**
      * Method add_admin_filters
      *
-     * @param $post_type $post_type [explicite description]
+     * @param $post_type [string]
      *
      * @return void
      */
@@ -114,18 +132,17 @@ class RobertCustomPostMeta
         if ('casos' !== $post_type) {
             return;
         }
-        $taxonomies_slugs = array(
+
+        $taxonomies_slugs = [
             'categoria-casos',
             'tecnologia-casos'
-        );
-        // loop through the taxonomy filters array
+        ];
+
         foreach ($taxonomies_slugs as $slug) {
             $taxonomy = get_taxonomy($slug);
             $selected = '';
-            // if the current page is already filtered, get the selected term slug
             $selected = isset($_REQUEST[$slug]) ? $_REQUEST[$slug] : '';
-            // render a dropdown for this taxonomy's terms
-            wp_dropdown_categories(array(
+            wp_dropdown_categories([
                 'show_option_all' =>  $taxonomy->labels->all_items,
                 'taxonomy'        =>  $slug,
                 'name'            =>  $slug,
@@ -133,7 +150,7 @@ class RobertCustomPostMeta
                 'value_field'     =>  'slug',
                 'selected'        =>  $selected,
                 'hierarchical'    =>  true,
-            ));
+            ]);
         }
     }
 
@@ -146,41 +163,41 @@ class RobertCustomPostMeta
     public function custom_services_cpt()
     {
 
-        $labels = array(
-            'name'                  => _x('Servicios', 'Post Type General Name', 'robertochoa'),
-            'singular_name'         => _x('Servicio', 'Post Type Singular Name', 'robertochoa'),
-            'menu_name'             => __('Servicios', 'robertochoa'),
-            'name_admin_bar'        => __('Servicios', 'robertochoa'),
-            'archives'              => __('Archivo de Servicios', 'robertochoa'),
-            'attributes'            => __('Atrributos de Servicio', 'robertochoa'),
-            'parent_item_colon'     => __('Servicio Padre:', 'robertochoa'),
-            'all_items'             => __('Todos los Servicios', 'robertochoa'),
-            'add_new_item'          => __('Agregar Nuevo Servicio', 'robertochoa'),
-            'add_new'               => __('Agregar Nuevo', 'robertochoa'),
-            'new_item'              => __('Nuevo Servicio', 'robertochoa'),
-            'edit_item'             => __('Editar Servicio', 'robertochoa'),
-            'update_item'           => __('Actualizar Servicio', 'robertochoa'),
-            'view_item'             => __('Ver Servicio', 'robertochoa'),
-            'view_items'            => __('Ver Servicios', 'robertochoa'),
-            'search_items'          => __('Buscar Servicio', 'robertochoa'),
-            'not_found'             => __('No hay resultados', 'robertochoa'),
-            'not_found_in_trash'    => __('No hay resultados en Papelera', 'robertochoa'),
-            'featured_image'        => __('Imagen del Servicio', 'robertochoa'),
-            'set_featured_image'    => __('Colocar Imagen del Servicio', 'robertochoa'),
-            'remove_featured_image' => __('Remover imagen del Servicio', 'robertochoa'),
-            'use_featured_image'    => __('Usar como imagen del Servicio', 'robertochoa'),
-            'insert_into_item'      => __('Insertar en Servicio', 'robertochoa'),
-            'uploaded_to_this_item' => __('Cargado a este Servicio', 'robertochoa'),
-            'items_list'            => __('Listado de Servicios', 'robertochoa'),
-            'items_list_navigation' => __('Nav. del Listado de Servicios', 'robertochoa'),
-            'filter_items_list'     => __('Filtro del Listado de Servicios', 'robertochoa'),
-        );
-        $args = array(
-            'label'                 => __('Servicio', 'robertochoa'),
-            'description'           => __('Servicios', 'robertochoa'),
+        $labels = [
+            'name'                  => esc_html_x('Servicios', 'Post Type General Name', 'robertochoa'),
+            'singular_name'         => esc_html_x('Servicio', 'Post Type Singular Name', 'robertochoa'),
+            'menu_name'             => esc_html__('Servicios', 'robertochoa'),
+            'name_admin_bar'        => esc_html__('Servicios', 'robertochoa'),
+            'archives'              => esc_html__('Archivo de Servicios', 'robertochoa'),
+            'attributes'            => esc_html__('Atrributos de Servicio', 'robertochoa'),
+            'parent_item_colon'     => esc_html__('Servicio Padre:', 'robertochoa'),
+            'all_items'             => esc_html__('Todos los Servicios', 'robertochoa'),
+            'add_new_item'          => esc_html__('Agregar Nuevo Servicio', 'robertochoa'),
+            'add_new'               => esc_html__('Agregar Nuevo', 'robertochoa'),
+            'new_item'              => esc_html__('Nuevo Servicio', 'robertochoa'),
+            'edit_item'             => esc_html__('Editar Servicio', 'robertochoa'),
+            'update_item'           => esc_html__('Actualizar Servicio', 'robertochoa'),
+            'view_item'             => esc_html__('Ver Servicio', 'robertochoa'),
+            'view_items'            => esc_html__('Ver Servicios', 'robertochoa'),
+            'search_items'          => esc_html__('Buscar Servicio', 'robertochoa'),
+            'not_found'             => esc_html__('No hay resultados', 'robertochoa'),
+            'not_found_in_trash'    => esc_html__('No hay resultados en Papelera', 'robertochoa'),
+            'featured_image'        => esc_html__('Imagen del Servicio', 'robertochoa'),
+            'set_featured_image'    => esc_html__('Colocar Imagen del Servicio', 'robertochoa'),
+            'remove_featured_image' => esc_html__('Remover imagen del Servicio', 'robertochoa'),
+            'use_featured_image'    => esc_html__('Usar como imagen del Servicio', 'robertochoa'),
+            'insert_into_item'      => esc_html__('Insertar en Servicio', 'robertochoa'),
+            'uploaded_to_this_item' => esc_html__('Cargado a este Servicio', 'robertochoa'),
+            'items_list'            => esc_html__('Listado de Servicios', 'robertochoa'),
+            'items_list_navigation' => esc_html__('Nav. del Listado de Servicios', 'robertochoa'),
+            'filter_items_list'     => esc_html__('Filtro del Listado de Servicios', 'robertochoa'),
+        ];
+        $args = [
+            'label'                 => esc_html__('Servicio', 'robertochoa'),
+            'description'           => esc_html__('Servicios', 'robertochoa'),
             'labels'                => $labels,
-            'supports'              => array('title', 'editor', 'thumbnail'),
-            'taxonomies'            => array('tipo-servicio'),
+            'supports'              => ['title', 'editor', 'thumbnail'],
+            'taxonomies'            => ['tipo-servicio'],
             'hierarchical'          => false,
             'public'                => true,
             'show_ui'               => true,
@@ -195,7 +212,7 @@ class RobertCustomPostMeta
             'publicly_queryable'    => true,
             'capability_type'       => 'page',
             'show_in_rest'          => true,
-        );
+        ];
         register_post_type('services', $args);
     }
 
@@ -207,40 +224,40 @@ class RobertCustomPostMeta
     public function custom_certificates_cpt()
     {
 
-        $labels = array(
-            'name'                  => _x('Certificados', 'Post Type General Name', 'robertochoa'),
-            'singular_name'         => _x('Certificado', 'Post Type Singular Name', 'robertochoa'),
-            'menu_name'             => __('Certificados', 'robertochoa'),
-            'name_admin_bar'        => __('Certificado', 'robertochoa'),
-            'archives'              => __('Archivo de Certificados', 'robertochoa'),
-            'attributes'            => __('Atrributos de Certificado', 'robertochoa'),
-            'parent_item_colon'     => __('Certificado Padre:', 'robertochoa'),
-            'all_items'             => __('Todos los Certificados', 'robertochoa'),
-            'add_new_item'          => __('Agregar Nuevo Certificado', 'robertochoa'),
-            'add_new'               => __('Agregar Nuevo', 'robertochoa'),
-            'new_item'              => __('Nuevo Certificado', 'robertochoa'),
-            'edit_item'             => __('Editar Certificado', 'robertochoa'),
-            'update_item'           => __('Actualizar Certificado', 'robertochoa'),
-            'view_item'             => __('Ver Certificado', 'robertochoa'),
-            'view_items'            => __('Ver Certificados', 'robertochoa'),
-            'search_items'          => __('Buscar Certificado', 'robertochoa'),
-            'not_found'             => __('No hay resultados', 'robertochoa'),
-            'not_found_in_trash'    => __('No hay resultados en Papelera', 'robertochoa'),
-            'featured_image'        => __('Imagen del Certificado', 'robertochoa'),
-            'set_featured_image'    => __('Colocar Imagen del Certificado', 'robertochoa'),
-            'remove_featured_image' => __('Remover imagen del Certificado', 'robertochoa'),
-            'use_featured_image'    => __('Usar como imagen del Certificado', 'robertochoa'),
-            'insert_into_item'      => __('Insertar en Certificado', 'robertochoa'),
-            'uploaded_to_this_item' => __('Cargado a este Certificado', 'robertochoa'),
-            'items_list'            => __('Listado de Certificado', 'robertochoa'),
-            'items_list_navigation' => __('Nav. del Listado de Servicios', 'robertochoa'),
-            'filter_items_list'     => __('Filtro del Listado de Certificado', 'robertochoa'),
-        );
-        $args = array(
-            'label'                 => __('Certificado', 'robertochoa'),
-            'description'           => __('Certificados', 'robertochoa'),
+        $labels = [
+            'name'                  => esc_html_x('Certificados', 'Post Type General Name', 'robertochoa'),
+            'singular_name'         => esc_html_x('Certificado', 'Post Type Singular Name', 'robertochoa'),
+            'menu_name'             => esc_html__('Certificados', 'robertochoa'),
+            'name_admin_bar'        => esc_html__('Certificado', 'robertochoa'),
+            'archives'              => esc_html__('Archivo de Certificados', 'robertochoa'),
+            'attributes'            => esc_html__('Atrributos de Certificado', 'robertochoa'),
+            'parent_item_colon'     => esc_html__('Certificado Padre:', 'robertochoa'),
+            'all_items'             => esc_html__('Todos los Certificados', 'robertochoa'),
+            'add_new_item'          => esc_html__('Agregar Nuevo Certificado', 'robertochoa'),
+            'add_new'               => esc_html__('Agregar Nuevo', 'robertochoa'),
+            'new_item'              => esc_html__('Nuevo Certificado', 'robertochoa'),
+            'edit_item'             => esc_html__('Editar Certificado', 'robertochoa'),
+            'update_item'           => esc_html__('Actualizar Certificado', 'robertochoa'),
+            'view_item'             => esc_html__('Ver Certificado', 'robertochoa'),
+            'view_items'            => esc_html__('Ver Certificados', 'robertochoa'),
+            'search_items'          => esc_html__('Buscar Certificado', 'robertochoa'),
+            'not_found'             => esc_html__('No hay resultados', 'robertochoa'),
+            'not_found_in_trash'    => esc_html__('No hay resultados en Papelera', 'robertochoa'),
+            'featured_image'        => esc_html__('Imagen del Certificado', 'robertochoa'),
+            'set_featured_image'    => esc_html__('Colocar Imagen del Certificado', 'robertochoa'),
+            'remove_featured_image' => esc_html__('Remover imagen del Certificado', 'robertochoa'),
+            'use_featured_image'    => esc_html__('Usar como imagen del Certificado', 'robertochoa'),
+            'insert_into_item'      => esc_html__('Insertar en Certificado', 'robertochoa'),
+            'uploaded_to_this_item' => esc_html__('Cargado a este Certificado', 'robertochoa'),
+            'items_list'            => esc_html__('Listado de Certificado', 'robertochoa'),
+            'items_list_navigation' => esc_html__('Nav. del Listado de Servicios', 'robertochoa'),
+            'filter_items_list'     => esc_html__('Filtro del Listado de Certificado', 'robertochoa'),
+        ];
+        $args = [
+            'label'                 => esc_html__('Certificado', 'robertochoa'),
+            'description'           => esc_html__('Certificados', 'robertochoa'),
             'labels'                => $labels,
-            'supports'              => array('title'),
+            'supports'              => ['title'],
             'hierarchical'          => false,
             'public'                => true,
             'show_ui'               => true,
@@ -255,53 +272,53 @@ class RobertCustomPostMeta
             'publicly_queryable'    => true,
             'capability_type'       => 'page',
             'show_in_rest'          => true,
-        );
+        ];
         register_post_type('certificados', $args);
     }
 
     /**
-     * Method custom_post_type
+     * Method custom_casos_cpt
      *
      * @return void
      */
-    public function custom_post_type()
+    public function custom_casos_cpt()
     {
 
-        $labels = array(
-            'name'                  => _x('Casos', 'Post Type General Name', 'robertochoa'),
-            'singular_name'         => _x('Caso', 'Post Type Singular Name', 'robertochoa'),
-            'menu_name'             => __('Casos de Éxito', 'robertochoa'),
-            'name_admin_bar'        => __('Casos de Éxito', 'robertochoa'),
-            'archives'              => __('Archivo de Casos', 'robertochoa'),
-            'attributes'            => __('Atributos de Caso', 'robertochoa'),
-            'parent_item_colon'     => __('Caso Padre:', 'robertochoa'),
-            'all_items'             => __('Todos los Casos', 'robertochoa'),
-            'add_new_item'          => __('Agregar Nuevo Caso', 'robertochoa'),
-            'add_new'               => __('Agregar Nuevo', 'robertochoa'),
-            'new_item'              => __('Nuevo Caso', 'robertochoa'),
-            'edit_item'             => __('Editar Caso', 'robertochoa'),
-            'update_item'           => __('Actualizar Caso', 'robertochoa'),
-            'view_item'             => __('Ver Caso', 'robertochoa'),
-            'view_items'            => __('Ver Casos', 'robertochoa'),
-            'search_items'          => __('Buscar Casos', 'robertochoa'),
-            'not_found'             => __('No hay resultados', 'robertochoa'),
-            'not_found_in_trash'    => __('No hay resultados en Papelera', 'robertochoa'),
-            'featured_image'        => __('Imagen Destacada', 'robertochoa'),
-            'set_featured_image'    => __('Colocar Imagen Destacada', 'robertochoa'),
-            'remove_featured_image' => __('Remover Imagen Destacada', 'robertochoa'),
-            'use_featured_image'    => __('Usar como Imagen Destacada', 'robertochoa'),
-            'insert_into_item'      => __('Insertar en Caso', 'robertochoa'),
-            'uploaded_to_this_item' => __('Cargado a este Caso', 'robertochoa'),
-            'items_list'            => __('Listado de Casos', 'robertochoa'),
-            'items_list_navigation' => __('Nav. del Listado de Casos', 'robertochoa'),
-            'filter_items_list'     => __('Filtro del Listado de Casos', 'robertochoa'),
-        );
-        $args = array(
-            'label'                 => __('Caso', 'robertochoa'),
-            'description'           => __('Casos de Éxito', 'robertochoa'),
+        $labels = [
+            'name'                  => esc_html_x('Casos', 'Post Type General Name', 'robertochoa'),
+            'singular_name'         => esc_html_x('Caso', 'Post Type Singular Name', 'robertochoa'),
+            'menu_name'             => esc_html__('Casos de Éxito', 'robertochoa'),
+            'name_admin_bar'        => esc_html__('Casos de Éxito', 'robertochoa'),
+            'archives'              => esc_html__('Archivo de Casos', 'robertochoa'),
+            'attributes'            => esc_html__('Atributos de Caso', 'robertochoa'),
+            'parent_item_colon'     => esc_html__('Caso Padre:', 'robertochoa'),
+            'all_items'             => esc_html__('Todos los Casos', 'robertochoa'),
+            'add_new_item'          => esc_html__('Agregar Nuevo Caso', 'robertochoa'),
+            'add_new'               => esc_html__('Agregar Nuevo', 'robertochoa'),
+            'new_item'              => esc_html__('Nuevo Caso', 'robertochoa'),
+            'edit_item'             => esc_html__('Editar Caso', 'robertochoa'),
+            'update_item'           => esc_html__('Actualizar Caso', 'robertochoa'),
+            'view_item'             => esc_html__('Ver Caso', 'robertochoa'),
+            'view_items'            => esc_html__('Ver Casos', 'robertochoa'),
+            'search_items'          => esc_html__('Buscar Casos', 'robertochoa'),
+            'not_found'             => esc_html__('No hay resultados', 'robertochoa'),
+            'not_found_in_trash'    => esc_html__('No hay resultados en Papelera', 'robertochoa'),
+            'featured_image'        => esc_html__('Imagen Destacada', 'robertochoa'),
+            'set_featured_image'    => esc_html__('Colocar Imagen Destacada', 'robertochoa'),
+            'remove_featured_image' => esc_html__('Remover Imagen Destacada', 'robertochoa'),
+            'use_featured_image'    => esc_html__('Usar como Imagen Destacada', 'robertochoa'),
+            'insert_into_item'      => esc_html__('Insertar en Caso', 'robertochoa'),
+            'uploaded_to_this_item' => esc_html__('Cargado a este Caso', 'robertochoa'),
+            'items_list'            => esc_html__('Listado de Casos', 'robertochoa'),
+            'items_list_navigation' => esc_html__('Nav. del Listado de Casos', 'robertochoa'),
+            'filter_items_list'     => esc_html__('Filtro del Listado de Casos', 'robertochoa'),
+        ];
+        $args = [
+            'label'                 => esc_html__('Caso', 'robertochoa'),
+            'description'           => esc_html__('Casos de Éxito', 'robertochoa'),
             'labels'                => $labels,
-            'supports'              => array('title', 'editor', 'thumbnail'),
-            'taxonomies'            => array('categoria-casos'),
+            'supports'              => ['title', 'editor', 'thumbnail'],
+            'taxonomies'            => ['categoria-casos'],
             'hierarchical'          => false,
             'public'                => true,
             'show_ui'               => true,
@@ -316,7 +333,7 @@ class RobertCustomPostMeta
             'publicly_queryable'    => true,
             'capability_type'       => 'post',
             'show_in_rest'          => true,
-        );
+        ];
         register_post_type('casos', $args);
     }
 
@@ -328,29 +345,29 @@ class RobertCustomPostMeta
     public function custom_casos_category_taxonomy()
     {
 
-        $labels = array(
-            'name'                       => _x('Categorías', 'Taxonomy General Name', 'robertochoa'),
-            'singular_name'              => _x('Categoría', 'Taxonomy Singular Name', 'robertochoa'),
-            'menu_name'                  => __('Categorias', 'robertochoa'),
-            'all_items'                  => __('Todas las Categorias', 'robertochoa'),
-            'parent_item'                => __('Categoría Padre', 'robertochoa'),
-            'parent_item_colon'          => __('Categoría Padre:', 'robertochoa'),
-            'new_item_name'              => __('Nueva Categoría', 'robertochoa'),
-            'add_new_item'               => __('Agregar Nueva Categoría', 'robertochoa'),
-            'edit_item'                  => __('Editar Categoría', 'robertochoa'),
-            'update_item'                => __('Actualizar Categoría', 'robertochoa'),
-            'view_item'                  => __('Ver Categoría', 'robertochoa'),
-            'separate_items_with_commas' => __('Separar categorias por comas', 'robertochoa'),
-            'add_or_remove_items'        => __('Agregar o Remover Categorias', 'robertochoa'),
-            'choose_from_most_used'      => __('Escoger de los más usados', 'robertochoa'),
-            'popular_items'              => __('Categorias Populares', 'robertochoa'),
-            'search_items'               => __('Buscar Categorias', 'robertochoa'),
-            'not_found'                  => __('No hay resultados', 'robertochoa'),
-            'no_terms'                   => __('No hay Categorias', 'robertochoa'),
-            'items_list'                 => __('Listado de Categorias', 'robertochoa'),
-            'items_list_navigation'      => __('Nav. del Listado de Categorias', 'robertochoa'),
-        );
-        $args = array(
+        $labels = [
+            'name'                       => esc_html_x('Categorías', 'Taxonomy General Name', 'robertochoa'),
+            'singular_name'              => esc_html_x('Categoría', 'Taxonomy Singular Name', 'robertochoa'),
+            'menu_name'                  => esc_html__('Categorias', 'robertochoa'),
+            'all_items'                  => esc_html__('Todas las Categorias', 'robertochoa'),
+            'parent_item'                => esc_html__('Categoría Padre', 'robertochoa'),
+            'parent_item_colon'          => esc_html__('Categoría Padre:', 'robertochoa'),
+            'new_item_name'              => esc_html__('Nueva Categoría', 'robertochoa'),
+            'add_new_item'               => esc_html__('Agregar Nueva Categoría', 'robertochoa'),
+            'edit_item'                  => esc_html__('Editar Categoría', 'robertochoa'),
+            'update_item'                => esc_html__('Actualizar Categoría', 'robertochoa'),
+            'view_item'                  => esc_html__('Ver Categoría', 'robertochoa'),
+            'separate_items_with_commas' => esc_html__('Separar categorias por comas', 'robertochoa'),
+            'add_or_remove_items'        => esc_html__('Agregar o Remover Categorias', 'robertochoa'),
+            'choose_from_most_used'      => esc_html__('Escoger de los más usados', 'robertochoa'),
+            'popular_items'              => esc_html__('Categorias Populares', 'robertochoa'),
+            'search_items'               => esc_html__('Buscar Categorias', 'robertochoa'),
+            'not_found'                  => esc_html__('No hay resultados', 'robertochoa'),
+            'no_terms'                   => esc_html__('No hay Categorias', 'robertochoa'),
+            'items_list'                 => esc_html__('Listado de Categorias', 'robertochoa'),
+            'items_list_navigation'      => esc_html__('Nav. del Listado de Categorias', 'robertochoa'),
+        ];
+        $args = [
             'labels'                     => $labels,
             'hierarchical'               => true,
             'public'                     => true,
@@ -359,8 +376,8 @@ class RobertCustomPostMeta
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => true,
             'show_in_rest'               => true,
-        );
-        register_taxonomy('categoria-casos', array('casos'), $args);
+        ];
+        register_taxonomy('categoria-casos', ['casos'], $args);
     }
 
     /**
@@ -371,29 +388,29 @@ class RobertCustomPostMeta
     public function custom_casos_technology_taxonomy()
     {
 
-        $labels = array(
-            'name'                       => _x('Tecnología', 'Taxonomy General Name', 'robertochoa'),
-            'singular_name'              => _x('Tecnología', 'Taxonomy Singular Name', 'robertochoa'),
-            'menu_name'                  => __('Tecnologias', 'robertochoa'),
-            'all_items'                  => __('Todas las Tecnologias', 'robertochoa'),
-            'parent_item'                => __('Tecnología Padre', 'robertochoa'),
-            'parent_item_colon'          => __('Tecnología Padre:', 'robertochoa'),
-            'new_item_name'              => __('Nueva Tecnología', 'robertochoa'),
-            'add_new_item'               => __('Agregar Nueva Tecnología', 'robertochoa'),
-            'edit_item'                  => __('Editar Tecnología', 'robertochoa'),
-            'update_item'                => __('Actualizar Tecnología', 'robertochoa'),
-            'view_item'                  => __('Ver Tecnología', 'robertochoa'),
-            'separate_items_with_commas' => __('Separar Tecnologias por comas', 'robertochoa'),
-            'add_or_remove_items'        => __('Agregar o Remover Tecnologias', 'robertochoa'),
-            'choose_from_most_used'      => __('Escoger de los más usados', 'robertochoa'),
-            'popular_items'              => __('Tecnologias Populares', 'robertochoa'),
-            'search_items'               => __('Buscar Tecnologias', 'robertochoa'),
-            'not_found'                  => __('No hay resultados', 'robertochoa'),
-            'no_terms'                   => __('No hay Tecnologias', 'robertochoa'),
-            'items_list'                 => __('Listado de Tecnologias', 'robertochoa'),
-            'items_list_navigation'      => __('Nav. del Listado de Tecnologias', 'robertochoa'),
-        );
-        $args = array(
+        $labels = [
+            'name'                       => esc_html_x('Tecnología', 'Taxonomy General Name', 'robertochoa'),
+            'singular_name'              => esc_html_x('Tecnología', 'Taxonomy Singular Name', 'robertochoa'),
+            'menu_name'                  => esc_html__('Tecnologias', 'robertochoa'),
+            'all_items'                  => esc_html__('Todas las Tecnologias', 'robertochoa'),
+            'parent_item'                => esc_html__('Tecnología Padre', 'robertochoa'),
+            'parent_item_colon'          => esc_html__('Tecnología Padre:', 'robertochoa'),
+            'new_item_name'              => esc_html__('Nueva Tecnología', 'robertochoa'),
+            'add_new_item'               => esc_html__('Agregar Nueva Tecnología', 'robertochoa'),
+            'edit_item'                  => esc_html__('Editar Tecnología', 'robertochoa'),
+            'update_item'                => esc_html__('Actualizar Tecnología', 'robertochoa'),
+            'view_item'                  => esc_html__('Ver Tecnología', 'robertochoa'),
+            'separate_items_with_commas' => esc_html__('Separar Tecnologias por comas', 'robertochoa'),
+            'add_or_remove_items'        => esc_html__('Agregar o Remover Tecnologias', 'robertochoa'),
+            'choose_from_most_used'      => esc_html__('Escoger de los más usados', 'robertochoa'),
+            'popular_items'              => esc_html__('Tecnologias Populares', 'robertochoa'),
+            'search_items'               => esc_html__('Buscar Tecnologias', 'robertochoa'),
+            'not_found'                  => esc_html__('No hay resultados', 'robertochoa'),
+            'no_terms'                   => esc_html__('No hay Tecnologias', 'robertochoa'),
+            'items_list'                 => esc_html__('Listado de Tecnologias', 'robertochoa'),
+            'items_list_navigation'      => esc_html__('Nav. del Listado de Tecnologias', 'robertochoa'),
+        ];
+        $args = [
             'labels'                     => $labels,
             'hierarchical'               => true,
             'public'                     => true,
@@ -402,9 +419,9 @@ class RobertCustomPostMeta
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => true,
             'show_in_rest'               => true,
-        );
-        register_taxonomy('tecnologia-casos', array('casos'), $args);
+        ];
+        register_taxonomy('tecnologia-casos', ['casos'], $args);
     }
 }
 
-new RobertCustomPostMeta();
+new ROCustomPostType();

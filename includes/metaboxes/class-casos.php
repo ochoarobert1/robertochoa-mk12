@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!class_exists('customMetaboxesCasos')) {
-    class customMetaboxesCasos extends customMetaboxesClass
+    class customMetaboxesCasos extends ROMetaboxesClass
     {
         /**
          * Main Constructor.

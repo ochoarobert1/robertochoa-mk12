@@ -11,6 +11,9 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+/**
+ * RobertMainThemeClass
+ */
 class RobertMainThemeClass
 {
     /**
@@ -35,14 +38,14 @@ class RobertMainThemeClass
     }
 
     /**
-     * Method main_functions
+     * Method mainFunctions
      *
      * @return void
      */
     public function mainFunctions()
     {
         load_theme_textdomain('robertochoa', get_template_directory() . '/languages');
-        add_theme_support('post-formats', array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio'));
+        add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio']);
         add_theme_support('post-thumbnails');
         add_theme_support('automatic-feed-links');
         add_theme_support('title-tag');
@@ -50,38 +53,37 @@ class RobertMainThemeClass
         add_theme_support('customize-selective-refresh-widgets');
         add_theme_support(
             'custom-background',
-            array(
+            [
                 'default-image' => '',
                 'default-color' => 'ffffff',
                 'wp-head-callback' => '_custom_background_cb',
                 'admin-head-callback' => '',
                 'admin-preview-callback' => ''
-            )
+            ]
         );
 
-
-        add_theme_support('custom-logo', array(
+        add_theme_support('custom-logo', [
             'height'      => 70,
             'width'       => 57,
             'flex-width'  => false,
             'flex-height' => false,
-            'header-text' => array( 'site-title', 'site-description' ),
+            'header-text' => ['site-title', 'site-description'],
             'unlink-homepage-logo' => true,
             'class' => 'logo'
-        ));
+        ]);
 
-        add_theme_support('html5', array(
+        add_theme_support('html5', [
             'search-form',
             'comment-form',
             'comment-list',
             'gallery',
             'caption',
-        ));
+        ]);
 
-        register_nav_menus(array(
+        register_nav_menus([
             'header_menu' => esc_attr__('Menu Header', 'robertochoa'),
             'footer_menu' => esc_attr__('Menu Footer', 'robertochoa'),
-        ));
+        ]);
 
         register_sidebars(5, [
             'name'          => esc_attr__('Footer Sidebar %d', 'robertochoa'),
@@ -138,67 +140,38 @@ class RobertMainThemeClass
     /**
      * Method customizeSection
      *
-     * @param $wp_customize $wp_customize [explicite description]
+     * @param $wp_customize [object]
      *
      * @return void
      */
     public function customizeSection($wp_customize)
     {
         $wp_customize->add_setting('white_logo');
-        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'white_logo', array(
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'white_logo', [
             'label' => esc_html__('Logo Blanco', 'robertochoa'),
             'section' => 'title_tagline',
             'settings' => 'white_logo',
             'priority' => 8
-        )));
+        ]));
 
-        //add footer section
-        $wp_customize->add_section('footer', array(
+        $wp_customize->add_section('footer', [
             'title'    => esc_html__('Footer', 'robertochoa'),
             'priority' => 10,
-        ));
+        ]);
 
-        //add copyright setting
         $wp_customize->add_setting('footer_copyright');
-        $wp_customize->add_control('footer_copyright', array(
+        $wp_customize->add_control('footer_copyright', [
             'type'     => 'text',
             'label'    => esc_html__('Texto Copyright', 'robertochoa'),
             'section'  => 'footer',
             'settings' => 'footer_copyright'
-        ));
+        ]);
     }
-
 }
 
 new RobertMainThemeClass();
 
-/**
- * Method phone_formatter
- *
- * @param $phone $phone [string]
- *
- * @return void
- */
-function phoneFormatter($phone)
-{
-    $formatted_number = preg_replace("[^0-9]", "", $phone);
-    $formatted_number = substr($formatted_number, 0, 3) . '-' . substr($formatted_number, 3, 3) . '-' . substr($formatted_number, 6);
-    return $formatted_number;
-}
-
-/**
- * Method email_formatter
- *
- * @param $email $email [string]
- *
- * @return void
- */
-function emailFormatter($email)
-{
-    $formatted_email = str_replace('@', '[at]', $email);
-    return $formatted_email;
-}
-
+require_once('includes/wp-helpers.php');
 require_once('includes/wp-enqueue-scripts.php');
 require_once('includes/wp-enqueue-styles.php');
 require_once('includes/wp-metabox-class.php');

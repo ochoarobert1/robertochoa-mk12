@@ -1,8 +1,19 @@
 <?php
 
 /**
-* Custom walker class.
+* Custom Walker Nav Menu
+*
+* @package RobertOchoa
+* @subpackage robertochoa-mk12-theme
+* @since Mk.12
 */
+
+if (! defined('ABSPATH')) {
+    exit;
+}
+/**
+ * RO_Walker_Nav_Menu
+ */
 class RO_Walker_Nav_Menu extends Walker_Nav_Menu
 {
     /**

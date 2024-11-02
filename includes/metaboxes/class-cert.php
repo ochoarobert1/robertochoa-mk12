@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!class_exists('customMetaboxesCert')) {
-    class customMetaboxesCert extends customMetaboxesClass
+    class customMetaboxesCert extends ROMetaboxesClass
     {
         /**
          * Main Constructor.
@@ -63,7 +63,7 @@ if (!class_exists('customMetaboxesCert')) {
                 'name'       => __('URL del certificado', 'robertochoa'),
                 'desc'       => __('Ingrese la dirección URL actual del certificado', 'robertochoa'),
                 'type'       => 'text_url'
-            )); 
+            ));
         }
     }
 
