@@ -9,12 +9,11 @@
     <?php if (is_array($arr_portfolio)) : ?>
         <div class="main-success-portfolio-container">
             <?php foreach ($arr_portfolio as $portfolio) : ?>
-                <?php setup_postdata($portfolio); ?>
-                <article id="<?php echo esc_attr(get_the_ID()); ?>" class="main-success-portfolio-item">
+
+                <article id="<?php echo esc_attr($portfolio); ?>" class="main-success-portfolio-item">
                     <picture>
-                        <a href="<?php echo esc_url(get_permalink()); ?>" title="<?php esc_attr_e('Ver más acerca de este caso de éxito', 'robertochoa'); ?>">
-                            <?php the_post_thumbnail('full', ['class' => 'response-class']);
-                            ?>
+                        <a href="<?php echo esc_url(get_permalink($portfolio)); ?>" title="<?php esc_attr_e('Ver más acerca de este caso de éxito', 'robertochoa'); ?>">
+                            <?php echo wp_kses_post(get_the_post_thumbnail($portfolio, 'full', ['class' => 'response-class'])); ?>
                         </a>
                     </picture>
                 </article>
@@ -24,7 +23,7 @@
                         <div class="percentage"><?php echo esc_html($arr_boxes[$i]['number']); ?></div>
                     </div>
                 </article>
-                <?php $i++;
+            <?php $i++;
             endforeach; ?>
         </div>
     <?php endif; ?>
