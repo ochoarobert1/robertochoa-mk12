@@ -115,8 +115,10 @@ class ROCustomPostType
     public function custom_columns_data($column, $post_id)
     {
         if ($column == 'thumbnail') {
-            $image = (get_the_post_thumbnail_url($post_id, 'thumbnail') != '') ? get_the_post_thumbnail_url($post_id, 'thumbnail') : 'http://placehold.it/70x70';
-            echo wp_kses_post(sprintf('<img src="%s" width="70" height="70" />', $image));
+            $image = (get_the_post_thumbnail_url($post_id, 'thumbnail') != '') ? get_the_post_thumbnail_url($post_id, 'thumbnail') : '';
+            if ($image !== '') {
+                echo wp_kses_post(sprintf('<img src="%s" width="70" height="70" />', $image));
+            }
         }
     }
 
