@@ -1,0 +1,87 @@
+/* Import custom fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700&family=Work+Sans:wght@200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom font styles */
+@layer base {
+  /* HTML5 structural elements */
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, main, menu, nav, section,
+  summary, dialog, canvas, audio, video,
+  /* HTML5 form elements */
+  datalist, fieldset, output, progress, meter,
+  /* HTML5 interactive elements */
+  details, dialog, menu, summary,
+  /* HTML5 embedded content */
+  audio, canvas, embed, iframe, img, object, picture, 
+  svg, video, source, track,
+  /* HTML5 text-level elements */
+  time, mark, ruby, rt, rp, bdi, wbr, data,
+  /* Common block elements */
+  div, hr, 
+  /* Common containers */
+  table, form, ul, ol, dl {
+    @apply box-border;
+  }
+
+  html {
+    font-family: "Roboto", system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Roboto", system-ui, sans-serif;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+}
+
+@theme {
+  /* Colors */
+  --color-hred: #e0040b;
+  --color-sgray: #f9f9f9;
+  --color-sblack: #3c3c3c;
+  --color-hblue: #151515;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Font weights */
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Breakpoints */
+  --breakpoint-xxs: 320px;
+  --breakpoint-xs: 414px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --tracking-wider: 5px;
+  --spacing: 3px;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+}

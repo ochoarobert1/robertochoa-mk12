@@ -6,6 +6,6 @@
         </div>
     </article>
     <picture class="main-hero-image" style="z-index: 99;">
-        <lottie-player src="<?php echo esc_url(get_template_directory_uri() . '/js/animation.json'); ?>" background="rgba(0, 0, 0, 0)" speed="1" style="z-index: -1; width: 70%; height: auto; margin: 2rem auto;" loop autoplay></lottie-player>
+        <lottie-player src="<?php echo esc_url(get_template_directory_uri() . '/dist/animation.json'); ?>" background="rgba(0, 0, 0, 0)" speed="1" style="z-index: -1; width: 70%; height: auto; margin: 2rem auto;" loop autoplay></lottie-player>
     </picture>
 </section>

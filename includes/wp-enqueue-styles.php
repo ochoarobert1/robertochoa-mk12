@@ -1,12 +1,12 @@
 <?php
 
 /**
-* WP Enqueue Styles
-*
-* @package RobertOchoa
-* @subpackage robertochoa-mk12-theme
-* @since Mk.12
-*/
+ * WP Enqueue Styles
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
 
 if (!defined('ABSPATH')) {
     die('Invalid request.');
@@ -24,12 +24,15 @@ function ro_load_styles()
         wp_register_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap', false, $version_remove, 'all');
         wp_enqueue_style('google-fonts');
 
+        wp_register_style('tw-style', get_template_directory_uri() . '/dist/styles.css', false, $version_remove, 'all');
+        wp_enqueue_style('tw-style');
+        /*
         wp_register_style('main-style', get_template_directory_uri() . '/css/robertochoa-style.css', false, $version_remove, 'all');
         wp_enqueue_style('main-style');
 
         wp_register_style('main-mediaqueries', get_template_directory_uri() . '/css/robertochoa-mediaqueries.css', false, $version_remove, 'all');
         wp_enqueue_style('main-mediaqueries');
-
+*/
         //wp_register_style('wp-initial-style', get_template_directory_uri() . '/style.css', false, $version_remove, 'all');
         //wp_enqueue_style('wp-initial-style');
     }

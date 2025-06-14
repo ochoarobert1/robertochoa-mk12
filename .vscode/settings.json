@@ -17,13 +17,15 @@
   "phpsab.standard": "./vendor/wp-coding-standards/wpcs/WordPress",
   "phpsab.executablePathCS": "./vendor/bin/phpcs",
   "phpsab.executablePathCBF": "./vendor/bin/phpcbf",
+  "prettier.useEditorConfig": false,
+  "prettier.singleQuote": true,
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false
   },
-  "css": {
+  "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
@@ -34,6 +36,12 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false
+  },
+  "[groovy]": {
+    "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "cSpell.words": [
     "ABSPATH",
@@ -103,14 +111,5 @@
     "usados",
     "Usar",
     "Yoast"
-  ],
-  "[groovy]": {
-    "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
-  },
-  "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  ]
 }

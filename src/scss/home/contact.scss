@@ -1,0 +1,108 @@
+@use "../common/utilities" as u;
+@reference "tailwindcss";
+
+.contact-form-container {
+  @apply flex items-start justify-between flex-wrap;
+
+  fieldset {
+    @apply border-0 inline-flex items-start justify-between flex-col p-0;
+  }
+
+  .form-group {
+    @apply flex-none w-full mb-4;
+
+    input,
+    textarea {
+      @apply w-full;
+    }
+
+    label {
+      @apply inline-block mb-1 text-xs;
+    }
+
+    .form-control {
+      @apply p-2 text-base h-10 border-0 border-b border-black;
+      @include u.transition-standard;
+    }
+
+    .form-control-textarea {
+      @apply h-[120px] font-normal;
+    }
+  }
+
+  .form-group-half {
+    @apply flex-none w-[49%] md:w-full;
+  }
+
+  .form-group-submit {
+    @apply text-center;
+  }
+
+  .btn-submit {
+    @apply cursor-pointer inline-block bg-hred text-white border-0 uppercase font-light
+           tracking-wider
+           py-4 px-8 xs:px-4
+           mt-3;
+    @include u.transition-standard;
+    @apply hover:bg-sblack;
+  }
+}
+
+.contact-data-container {
+  @apply font-light -tracking-[0.2px];
+
+  .contact-data-item {
+    @apply flex items-center justify-start flex-wrap;
+
+    h4 {
+      @apply flex-none w-full my-4;
+    }
+
+    .contact-data-phone-item {
+      @apply flex-none w-full flex items-center justify-start mb-2;
+    }
+
+    .contact-data-item-icon {
+      @apply flex-none w-[35px];
+    }
+
+    .contact-data-item-content {
+      @apply flex-none w-[80%];
+
+      a {
+        @apply text-black underline;
+      }
+    }
+  }
+}
+
+.main-contact-section {
+  @apply py-6 pb-16 px-4;
+
+  .main-contact-title {
+    @apply text-center text-base font-light -tracking-[0.2px] leading-8 py-8 px-4;
+
+    h2 {
+      @apply md:text-[2.1rem] text-xl font-black;
+    }
+  }
+
+  .main-contact-content {
+    @apply flex items-start justify-between flex-wrap
+            flex-col sm:flex-row gap-5 max-w-[1280px]
+            mx-auto py-4 px-6 rounded-[25px];
+
+    .contact-data-container {
+      @apply flex-none w-full md:w-[38%]
+             bg-sgray text-black
+             p-4 rounded-[20px]
+             sm:order-2;
+    }
+
+    .contact-form-container {
+      @apply flex-none w-full md:w-[58%]
+             py-4 px-0
+             sm:order-1;
+    }
+  }
+}

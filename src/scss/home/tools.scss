@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+
+.main-tools-container {
+  @apply bg-sgray py-6 px-4 text-center;
+
+  h2 {
+    @apply md:text-[2.1rem] text-xl font-black;
+  }
+
+  .main-tools-content {
+    @apply flex items-center justify-between lg:justify-center flex-wrap
+           max-w-[90%] xl:max-w-[90vw] lg:max-w-[95vw]
+           mx-auto py-8 px-4 md:pb-0;
+
+    .main-tools-item {
+      @apply flex-none  w-1/2 max-w-[45%] sm:w-[30%] sm:max-w-[30%] lg:max-w-[16%] lg:w-[16%]
+             xl:w-[12%] xl:max-w-[12%] md:w-1/2 md:max-w-[50%]
+             text-center mb-8 lg:mb-4 md:mb-8
+             lg:px-4 xs:px-2;
+    }
+  }
+}
