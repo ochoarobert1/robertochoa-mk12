@@ -1,3 +1,4 @@
+@use "../common/utilities" as u;
 @reference "tailwindcss";
 
 .main-services-container {
@@ -26,9 +27,9 @@
         @apply flex items-center justify-center flex-wrap
                border-3 border-hred rounded-full
                lg:h-[150px] lg:max-w-[150px] h-[16vw] max-w-[16vw] sm:h-[25vw] sm:max-w-[25vw]
-               mx-auto
-               transition-all duration-300 ease-in-out
-               hover:bg-gray-200;
+               mx-auto;
+        @include u.transition-standard;
+        @apply hover:bg-gray-200;
 
         img {
           @apply p-4;
@@ -43,13 +44,8 @@
 
   .main-services-content-button {
     .btn {
-      @apply w-full box-border lg:w-auto text-center inline-block bg-hred text-white uppercase font-light 
-             tracking-wider no-underline
-             py-3 px-4 sm:py-3 sm:px-6 md:py-3 md:px-4 lg:py-4 lg:px-8
-             text-sm sm:text-base md:text-base lg:text-base
-             mt-4 sm:mt-0 md:mt-0 lg:mt-5
-             transition-all duration-300 ease-in-out 
-             hover:bg-sblack;
+      @include u.btn-primary;
+      @apply w-auto mt-4 sm:mt-0 md:mt-0 lg:mt-5;
     }
   }
 }

@@ -1,16 +1,17 @@
+@use "../common/utilities" as u;
 @reference "tailwindcss";
 
 .main-hero-container {
-  @apply flex items-center justify-between flex-wrap 
-         px-4 sm:px-8 pt-4 pb-0 lg:min-h-[70vh];
+  @apply flex items-center justify-center md:justify-between flex-wrap 
+         px-4 sm:px-8 pt-4 pb-0 md:min-h-[70vh];
 
   .main-hero-content {
-    @apply flex-none w-full md:w-1/2 max-w-full md:max-w-[50%] 
+    @apply flex-none w-full md:w-1/2 max-w-full sm:max-w-[85%] md:max-w-[50%] 
            px-0 md:px-[0] lg:px-[2vw] xl:px-[3vw] 2xl:px-[8vw]
-           text-sm sm:text-base md:text-xl leading-7 sm:leading-[2.1rem] 
+           text-sm md:text-base xl:text-xl leading-8 sm:leading-[2.1rem] 
            font-light -tracking-[0.2px] mt-0 md:-mt-[5vh]
            order-last md:order-none
-           py-8 lg:py-0 text-center md:text-left;
+           py-8 md:py-0 text-center md:text-left;
 
     @screen sm {
       @apply px-4;
@@ -25,26 +26,21 @@
     }
 
     h1 {
-      @apply m-0 
-             text-2xl sm:text-4xl md:text-[2.5rem] lg:text-5xl 2xl:text-[3.5rem]
-             leading-9 sm:leading-[3rem] md:leading-[3.3rem] lg:leading-[3.8rem] 2xl:leading-[4.5rem]
-             font-extralight tracking-tighter uppercase;
+      @apply m-0;
+      @include u.responsive-heading;
+      @apply uppercase;
     }
 
     .btn {
-      @apply box-border lg:w-auto text-center inline-block bg-hred text-white uppercase font-light 
-             tracking-wider no-underline
-             py-3 px-4 sm:py-3 sm:px-6 md:py-3 md:px-4 lg:py-4 lg:px-8
-             text-sm sm:text-base md:text-base lg:text-base
-             mt-4 sm:mt-0 md:mt-0 lg:mt-5
-             transition-all duration-300 ease-in-out 
-             hover:bg-sblack;
+      @include u.btn-primary;
+      @apply lg:w-auto mt-4 sm:mt-0 md:mt-5;
     }
   }
 
   .main-hero-image {
-    @apply flex-none w-full md:w-[49%] max-w-full md:max-w-[49%] 
-           -z-10 order-first md:order-none;
+    @apply flex-none w-full sm:w-[70%] md:w-[49%] max-w-full 
+            sm:max-w-[70%] md:max-w-[49%] 
+            -z-10 order-first md:order-none;
 
     img {
       @apply max-w-[80vw] sm:max-w-[60vw] md:max-w-none

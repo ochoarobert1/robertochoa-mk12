@@ -1,3 +1,4 @@
+@use "../common/utilities" as u;
 @reference "tailwindcss";
 
 .footer-section {
@@ -70,27 +71,11 @@
     input[type='text'],
     input[type='email'],
     input[type='tel'] {
-      @apply w-full flex-none max-w-full p-1.5 text-sm border-0 font-light focus:outline-none focus:outline-hblue focus:outline-1;
+      @include u.form-input;
     }
 
     input[type='submit'] {
-      @apply cursor-pointer bg-hred text-white text-center uppercase font-light tracking-wider py-4 px-8 mt-3 border-0 w-full transition-all duration-300 ease-in-out hover:bg-sblack;
-
-      @media screen and (max-width: 1440px) {
-        @apply tracking-wide py-4 px-2;
-      }
-
-      @media screen and (max-width: 1170px) {
-        @apply text-sm tracking-normal;
-      }
-
-      @media screen and (max-width: 991px) {
-        @apply tracking-wider py-4 px-8 text-base;
-      }
-
-      @media screen and (max-width: 414px) {
-        @apply text-sm tracking-normal py-4 px-0;
-      }
+      @include u.form-submit;
     }
   }
 

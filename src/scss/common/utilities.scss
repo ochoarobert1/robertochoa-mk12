@@ -1,0 +1,135 @@
+@reference "tailwindcss";
+
+// Common button styles
+@mixin btn-primary {
+  @apply box-border text-center inline-block bg-hred text-white uppercase font-light 
+         tracking-wider no-underline
+         py-3 px-4 sm:py-3 sm:px-6 md:py-3 md:px-8 lg:py-4 lg:px-8
+         text-sm sm:text-base md:text-base lg:text-base
+         transition-all duration-300 ease-in-out 
+         hover:bg-sblack;
+}
+
+// Common transitions
+@mixin transition-standard {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+// Common decorative elements
+@mixin corner-decoration {
+  &::before {
+    content: "";
+    @apply absolute top-2.5 right-0 w-0.5 h-1.5 opacity-0 bg-hred transition-all duration-300 ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    @apply absolute top-0 right-0 w-1.5 h-0.5 opacity-0 bg-hred transition-all duration-300 ease-in-out;
+  }
+
+  &:hover::before {
+    @apply top-[88%];
+  }
+
+  &:hover::after {
+    top: -1px;
+    right: calc(100% - 5px);
+  }
+
+  &:hover::after,
+  &:hover::before {
+    @apply opacity-100;
+  }
+}
+
+// Common menu item styles
+@mixin menu-item-base {
+  @apply py-2.5 px-[15px] relative;
+  @include corner-decoration;
+}
+
+// Common menu link styles
+@mixin menu-link {
+  @apply text-sblack border-b-2 no-underline border-transparent uppercase font-bold tracking-tight;
+  @include transition-standard;
+
+  &::before {
+    content: "";
+    @apply absolute top-2.5 right-0 w-1.5 h-0.5 opacity-0 bg-hred transition-all duration-300 ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    @apply absolute top-2.5 right-0 w-1.5 h-0.5 opacity-0 bg-hred transition-all duration-300 ease-in-out;
+  }
+
+  &:hover {
+    @apply opacity-80;
+  }
+
+  &:hover::after,
+  &:hover::before {
+    @apply opacity-100;
+  }
+
+  &:hover::before {
+    @apply top-0.5 -left-0.5 rotate-90;
+  }
+
+  &:hover::after {
+    @apply top-auto bottom-0;
+    left: calc(100% - 6px);
+  }
+}
+
+// Common active menu item styles
+@mixin active-menu-item {
+  &::before,
+  &::after {
+    @apply hidden;
+  }
+
+  a {
+    @apply text-black opacity-80 border-hred;
+
+    &::before,
+    &::after {
+      @apply hidden;
+    }
+  }
+}
+
+// Common responsive text styles
+@mixin responsive-heading {
+  @apply text-2xl sm:text-4xl md:text-[2.5rem] lg:text-5xl 2xl:text-[3.5rem]
+         leading-9 sm:leading-[3rem] md:leading-[3.3rem] lg:leading-[3.8rem] 2xl:leading-[4.5rem]
+         font-extralight tracking-tighter;
+}
+
+// Common form input styles
+@mixin form-input {
+  @apply w-full flex-none max-w-full p-1.5 text-sm border-0 font-light focus:outline-none focus:outline-hblue focus:outline-1;
+}
+
+// Common form submit button
+@mixin form-submit {
+  @apply cursor-pointer bg-hred text-white text-center uppercase font-light tracking-wider py-4 px-8 mt-3 border-0 w-full;
+  @include transition-standard;
+  @apply hover:bg-sblack;
+
+  @media screen and (max-width: 1440px) {
+    @apply tracking-wide py-4 px-2;
+  }
+
+  @media screen and (max-width: 1170px) {
+    @apply text-sm tracking-normal;
+  }
+
+  @media screen and (max-width: 991px) {
+    @apply tracking-wider py-4 px-8 text-base;
+  }
+
+  @media screen and (max-width: 414px) {
+    @apply text-sm tracking-normal py-4 px-0;
+  }
+}

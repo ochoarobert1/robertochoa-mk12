@@ -1,7 +1,8 @@
+@use "../common/utilities" as u;
 @reference "tailwindcss";
 
 .main-about-container {
-  @apply py-8;
+  @apply py-18;
 
   .main-about-content {
     @apply flex items-center justify-between flex-wrap
@@ -15,7 +16,7 @@
     .main-about-info {
       @apply flex-none lg:w-[60%] lg:max-w-[60%] w-full max-w-full
              text-sm md:text-base font-light -tracking-[0.2px]
-             leading-6 lg:leading-relaxed md:leading-relaxed
+             leading-8 lg:leading-relaxed md:leading-relaxed
              py-8 pb-20 xl:pb-8 lg:py-0 lg:pb-8 md:pb-12;
 
       small {
@@ -27,13 +28,8 @@
       }
 
       .btn {
-       @apply w-full box-border lg:w-auto text-center inline-block bg-hred text-white uppercase font-light 
-             tracking-wider no-underline
-             py-3 px-4 sm:py-3 sm:px-6 md:py-3 md:px-4 lg:py-4 lg:px-8
-             text-sm sm:text-base md:text-base lg:text-base
-             mt-4 sm:mt-0 md:mt-0 lg:mt-5
-             transition-all duration-300 ease-in-out 
-             hover:bg-sblack;
+        @include u.btn-primary;
+        @apply w-auto mt-4 sm:mt-0 md:mt-5;
       }
     }
   }
