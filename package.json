@@ -5,23 +5,32 @@
   "author": "Robert Ochoa",
   "homepage": "https://github.com/ochoarobert1/robertochoa-mk12#readme",
   "license": "ISC",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ochoarobert1/robertochoa-mk12.git"
   },
   "scripts": {
-    "build": "vite build",
+    "clean": "rimraf dist",
+    "build": "npm run clean && vite build",
     "dev": "vite",
-    "watch": "vite build --watch",
+    "watch": "npm run clean && vite build --watch",
     "lint:fix": "eslint src --fix",
     "lint": "eslint src"
   },
   "devDependencies": {
-    "eslint": "^8.42.0",
+    "@tailwindcss/postcss": "^4.1.10",
+    "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "vite": "^4.3.9",
+    "rimraf": "^6.0.1",
+    "sass-embedded": "^1.89.2",
+    "vite": "^6.3.5",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-static-copy": "^0.15.0"
+    "vite-plugin-static-copy": "^3.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
+    "tailwindcss": "^4.1.10"
   }
 }

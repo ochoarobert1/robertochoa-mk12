@@ -1,0 +1,85 @@
+@use "../common/utilities" as u;
+@reference "tailwindcss";
+
+.footer-section {
+  @apply bg-black text-white py-12 pt-12 px-4;
+
+  .footer-wrapper {
+    @apply mx-auto max-w-[90%] flex items-start justify-between flex-wrap gap-1;
+
+    .footer-item {
+      @apply flex-none w-[21%] max-w-[21%] mb-8;
+
+      &:first-child {
+        @apply flex-none w-[8%] max-w-[8%];
+      }
+
+      @media screen and (max-width: 991px) {
+        @apply flex-none w-[24%] max-w-[24%];
+
+        &:first-child {
+          @apply flex-none w-[10%] max-w-[10%];
+        }
+
+        &:nth-child(5) {
+          @apply flex-none w-full max-w-full;
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        @apply flex-none w-full max-w-full;
+
+        &:first-child {
+          @apply flex-none w-full max-w-full;
+        }
+      }
+
+      h3,
+      .widget-title {
+        @apply mt-0;
+      }
+
+      .widget_text p {
+        @apply text-base font-light leading-relaxed;
+      }
+
+      .menu {
+        @apply list-none p-0 flex items-start flex-col gap-2.5 font-light;
+
+        li {
+          a {
+            @apply text-white no-underline hover:text-hred;
+          }
+        }
+      }
+    }
+
+    .footer-wide {
+      @apply pt-12 flex-none w-full max-w-full text-center;
+    }
+  }
+}
+
+.mc4wp-form-fields {
+  .form-control {
+    @apply flex items-start justify-start flex-col;
+
+    label {
+      @apply flex-none w-full max-w-full text-sm inline-flex items-center my-1.5 cursor-pointer;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='tel'] {
+      @include u.form-input;
+    }
+
+    input[type='submit'] {
+      @include u.form-submit;
+    }
+  }
+
+  .small-message {
+    @apply mt-2.5;
+  }
+}

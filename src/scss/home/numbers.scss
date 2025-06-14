@@ -1,0 +1,24 @@
+@reference "tailwindcss";
+
+.main-numbers-container {
+  @apply bg-sgray text-sblack shadow-lg;
+
+  .main-numbers-content {
+    @apply flex items-center justify-between flex-wrap 
+           max-w-full xs:max-w-[90%] xl:max-w-[85vw] lg:max-w-[90vw] sm:max-w-[95vw]
+           mx-auto py-8 px-4 sm:pb-0;
+
+    .main-numbers-item {
+      @apply text-center lg:text-base text-sm tracking-tight lg:tracking-normal font-light
+             md:flex-none w-1/2 md:max-w-[50%] lg:max-w-[25%] md:mb-4;
+
+      img {
+        @apply mx-auto mb-4 block max-h-[50px] h-auto w-auto opacity-70;
+      }
+
+      span.number {
+        @apply block text-4xl sm:text-5xl lg:text-4xl leading-7 font-black mt-6 mb-0;
+      }
+    }
+  }
+}

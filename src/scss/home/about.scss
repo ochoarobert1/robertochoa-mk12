@@ -1,0 +1,36 @@
+@use "../common/utilities" as u;
+@reference "tailwindcss";
+
+.main-about-container {
+  @apply py-18;
+
+  .main-about-content {
+    @apply flex items-center justify-between flex-wrap
+           max-w-[90%] 2xl:max-w-[80vw] xl:max-w-[90vw] lg:max-w-[95vw] md:max-w-[85vw]
+           mx-auto;
+
+    .main-about-image {
+      @apply flex-none lg:w-[40%] lg:max-w-[40%] w-full text-center;
+    }
+
+    .main-about-info {
+      @apply flex-none lg:w-[60%] lg:max-w-[60%] w-full max-w-full
+             text-sm md:text-base font-light -tracking-[0.2px]
+             leading-8 lg:leading-relaxed md:leading-relaxed
+             py-8 pb-20 xl:pb-8 lg:py-0 lg:pb-8 md:pb-12;
+
+      small {
+        @apply text-hred text-xs font-black;
+      }
+
+      h2 {
+        @apply md:text-[2.1rem] text-xl my-2 font-black;
+      }
+
+      .btn {
+        @include u.btn-primary;
+        @apply w-auto mt-4 sm:mt-0 md:mt-5;
+      }
+    }
+  }
+}

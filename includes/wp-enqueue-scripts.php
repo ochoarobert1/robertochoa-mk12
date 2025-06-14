@@ -21,7 +21,7 @@ function ro_load_scripts()
 {
     $version_remove = null;
     if (!is_admin()) {
-        wp_register_script('main-functions', get_template_directory_uri() . '/js/functions.js', [], $version_remove, true);
+        wp_register_script('main-functions', get_template_directory_uri() . '/dist/functions.js', [], $version_remove, true);
         wp_enqueue_script('main-functions');
 
         wp_register_script('lottie-functions', 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js', [], $version_remove, true);

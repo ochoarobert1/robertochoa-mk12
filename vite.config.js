@@ -1,31 +1,46 @@
-import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import eslint from 'vite-plugin-eslint';
+import { defineConfig } from "vite";
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import postcss from "@tailwindcss/postcss";
+import { existsSync, rmSync } from "fs";
+
+// Clean the dist directory before build
+if (existsSync("./dist")) {
+  console.log("Cleaning dist directory...");
+  rmSync("./dist", { recursive: true, force: true });
+}
 
 export default defineConfig({
+  server: {
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
+  },
   build: {
-    outDir: 'js',
+    outDir: "dist",
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        functions: 'src/index.js',
+        functions: "src/index.js",
+        styles: "src/scss/app.scss",
       },
       output: {
-        entryFileNames: '[name].js',
+        entryFileNames: "[name].js",
+        assetFileNames: "[name].[ext]",
       },
     },
   },
+  css: {
+    postcss: {
+      plugins: [postcss()],
+    },
+  },
   plugins: [
-    eslint({
-      include: ['src/**/*.js'],
-      exclude: ['node_modules/**', 'js/**'],
-      emitError: true,
-      emitWarning: true,
-    }),
     viteStaticCopy({
       targets: [
         {
-          src: 'src/json/*.json',
-          dest: '.',
+          src: "src/json/*.json",
+          dest: ".",
         },
       ],
     }),
