@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Numbers Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <?php $arr_numbers = ro_meta_value('ro_home_numbers_group'); ?>
 <?php if (!empty($arr_numbers)) : ?>
 <section class="main-numbers-container">

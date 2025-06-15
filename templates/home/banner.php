@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Banner Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-hero-container" style="background-color: #FFF;">
     <article class="main-hero-content">
         <?php the_content(); ?>

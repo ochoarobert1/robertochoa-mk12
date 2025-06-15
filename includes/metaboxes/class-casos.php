@@ -38,6 +38,13 @@ if (!class_exists('customMetaboxesCasos')) {
             ));
 
             $cmb_casos->add_field(array(
+                'id'            => parent::PREFIX . 'featured',
+                'name'       => __('Featured Item', 'robertochoa'),
+                'desc'       => __('Check this if you want to show this item in the featured section', 'robertochoa'),
+                'type'       => 'checkbox'
+            ));
+
+            $cmb_casos->add_field(array(
                 'id'            => parent::PREFIX . 'caso_date',
                 'name'       => __('Fecha', 'robertochoa'),
                 'desc'       => __('Ingrese la fecha de finalización del caso', 'robertochoa'),

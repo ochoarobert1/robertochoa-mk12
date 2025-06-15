@@ -34,6 +34,11 @@ class ROCustomPostType
         add_action('manage_casos_posts_custom_column', [$this, 'custom_columns_data'], 10, 2);
         add_filter('manage_certificados_posts_columns', [$this, 'add_cert_custom_columns']);
         add_action('manage_certificados_posts_custom_column', [$this, 'custom_cert_columns_data'], 10, 2);
+        add_action('quick_edit_custom_box', [$this, 'add_quick_edit_field'], 10, 2);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue_quick_edit_script']);
+        add_action('save_post', [$this, 'save_quick_edit_data']);
+        add_action('bulk_edit_custom_box', [$this, 'add_bulk_edit_field'], 10, 2);
+        add_action('wp_ajax_save_bulk_edit_featured', [$this, 'save_bulk_edit_featured']);
     }
 
     /**
@@ -99,6 +104,7 @@ class ROCustomPostType
     {
         unset($columns['date']);
         $columns['thumbnail'] = esc_html__('Thumbnail', 'robertochoa');
+        $columns['featured'] = esc_html__('Featured', 'robertochoa');
         $columns['date'] = esc_html__('Date', domain: 'robertochoa');
 
         return $columns;
@@ -118,6 +124,15 @@ class ROCustomPostType
             $image = (get_the_post_thumbnail_url($post_id, 'thumbnail') != '') ? get_the_post_thumbnail_url($post_id, 'thumbnail') : '';
             if ($image !== '') {
                 echo wp_kses_post(sprintf('<img src="%s" width="70" height="70" />', $image));
+            }
+        }
+
+        if ($column == 'featured') {
+            $featured = get_post_meta($post_id, 'ro_featured', true);
+            if ($featured == '1') {
+                echo wp_kses_post(sprintf('<span class="dashicons dashicons-yes"></span>'));
+            } else {
+                echo wp_kses_post(sprintf('<span class="dashicons dashicons-no"></span>'));
             }
         }
     }
@@ -287,8 +302,8 @@ class ROCustomPostType
     {
 
         $labels = [
-            'name'                  => esc_html_x('Casos', 'Post Type General Name', 'robertochoa'),
-            'singular_name'         => esc_html_x('Caso', 'Post Type Singular Name', 'robertochoa'),
+            'name'                  => esc_html_x('Casos de Éxito', 'Post Type General Name', 'robertochoa'),
+            'singular_name'         => esc_html_x('Caso de Éxito', 'Post Type Singular Name', 'robertochoa'),
             'menu_name'             => esc_html__('Casos de Éxito', 'robertochoa'),
             'name_admin_bar'        => esc_html__('Casos de Éxito', 'robertochoa'),
             'archives'              => esc_html__('Archivo de Casos', 'robertochoa'),
@@ -301,7 +316,7 @@ class ROCustomPostType
             'edit_item'             => esc_html__('Editar Caso', 'robertochoa'),
             'update_item'           => esc_html__('Actualizar Caso', 'robertochoa'),
             'view_item'             => esc_html__('Ver Caso', 'robertochoa'),
-            'view_items'            => esc_html__('Ver Casos', 'robertochoa'),
+            'view_items'            => esc_html__('Ver Casos de Éxito', 'robertochoa'),
             'search_items'          => esc_html__('Buscar Casos', 'robertochoa'),
             'not_found'             => esc_html__('No hay resultados', 'robertochoa'),
             'not_found_in_trash'    => esc_html__('No hay resultados en Papelera', 'robertochoa'),
@@ -316,7 +331,7 @@ class ROCustomPostType
             'filter_items_list'     => esc_html__('Filtro del Listado de Casos', 'robertochoa'),
         ];
         $args = [
-            'label'                 => esc_html__('Caso', 'robertochoa'),
+            'label'                 => esc_html__('Caso de Éxito', 'robertochoa'),
             'description'           => esc_html__('Casos de Éxito', 'robertochoa'),
             'labels'                => $labels,
             'supports'              => ['title', 'editor', 'thumbnail'],
@@ -423,6 +438,140 @@ class ROCustomPostType
             'show_in_rest'               => true,
         ];
         register_taxonomy('tecnologia-casos', ['casos'], $args);
+    }
+
+    /**
+     * Add custom field to Quick Edit
+     *
+     * @param string $column_name Column name
+     * @param string $post_type Post type
+     * @return void
+     */
+    public function add_quick_edit_field($column_name, $post_type)
+    {
+        if ($post_type !== 'casos' || $column_name !== 'featured') {
+            return;
+        }
+?>
+        <fieldset class="inline-edit-col-right">
+            <div class="inline-edit-col">
+                <label class="inline-edit-group">
+                    <span class="title"><?php esc_html_e('Featured', 'robertochoa'); ?></span>
+                    <input type="checkbox" name="ro_featured" value="1" />
+                </label>
+            </div>
+        </fieldset>
+    <?php
+    }
+
+    /**
+     * Enqueue JavaScript for Quick Edit
+     *
+     * @param string $hook Current admin page
+     * @return void
+     */
+    public function enqueue_quick_edit_script($hook)
+    {
+        if ('edit.php' !== $hook || !isset($_GET['post_type']) || $_GET['post_type'] !== 'casos') {
+            return;
+        }
+
+        wp_enqueue_script(
+            'ro-quick-edit',
+            get_template_directory_uri() . '/js/quick-edit.js',
+            ['jquery'],
+            '1.0.0',
+            true
+        );
+    }
+
+    /**
+     * Save Quick Edit data
+     *
+     * @param int $post_id Post ID
+     * @return void
+     */
+    public function save_quick_edit_data($post_id)
+    {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        if (get_post_type($post_id) !== 'casos') {
+            return;
+        }
+
+        // Update ro_featured meta
+        if (isset($_POST['ro_featured'])) {
+            update_post_meta($post_id, 'ro_featured', '1');
+        } else {
+            update_post_meta($post_id, 'ro_featured', '0');
+        }
+    }
+
+    /**
+     * Add custom field to Bulk Edit
+     *
+     * @param string $column_name Column name
+     * @param string $post_type Post type
+     * @return void
+     */
+    public function add_bulk_edit_field($column_name, $post_type)
+    {
+        if ($post_type !== 'casos' || $column_name !== 'featured') {
+            return;
+        }
+    ?>
+        <fieldset class="inline-edit-col-right">
+            <div class="inline-edit-col">
+                <label class="alignleft">
+                    <span class="title"><?php esc_html_e('Featured', 'robertochoa'); ?></span>
+                    <select name="ro_featured_bulk">
+                        <option value="-1"><?php esc_html_e('— No Change —', 'robertochoa'); ?></option>
+                        <option value="1"><?php esc_html_e('Yes', 'robertochoa'); ?></option>
+                        <option value="0"><?php esc_html_e('No', 'robertochoa'); ?></option>
+                    </select>
+                </label>
+            </div>
+        </fieldset>
+<?php
+    }
+    // TODO: Needs Revision
+    /**
+     * Save bulk edit data via AJAX
+     */
+    public function save_bulk_edit_featured()
+    {
+        // Security check - no need for nonce verification as we're using admin-ajax
+        if (!current_user_can('edit_posts')) {
+            wp_die('Permission denied');
+        }
+
+        // Get the post IDs
+        $post_ids = isset($_POST['post_ids']) ? $_POST['post_ids'] : false;
+        $featured_value = isset($_POST['featured_value']) ? $_POST['featured_value'] : '-1';
+
+        if (!$post_ids || $featured_value === '-1') {
+            wp_die('No posts or value specified');
+        }
+
+        // Convert to array
+        $post_ids = explode(',', $post_ids);
+
+        // Update each post
+        foreach ($post_ids as $post_id) {
+            $post_id = (int) $post_id;
+            if ($post_id > 0) {
+                update_post_meta($post_id, 'ro_featured', $featured_value);
+            }
+        }
+
+        echo 'success';
+        wp_die();
     }
 }
 

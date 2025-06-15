@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Blog Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-blog-section">
     <header class="main-blog-title">
         <?php $section_title = ro_meta_value('ro_home_blog_title'); ?>

@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Content: Contact Form Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <form id="contactForm" class="contact-form-container">
     <fieldset class="form-group">
         <label for="name"><?php esc_html_e('Nombre y Apellido', 'robertochoa'); ?></label>

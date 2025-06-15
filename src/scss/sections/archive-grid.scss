@@ -1,0 +1,103 @@
+@use "../common/utilities" as u;
+@reference "tailwindcss";
+
+.archive-grid-container {
+  @apply py-6 px-4;
+
+  .archive-grid-content {
+    @apply max-w-[90%] mx-auto;
+
+    .archive-filter {
+      @apply flex items-center justify-center flex-wrap gap-2 mb-8;
+
+      .filter-pill {
+        @apply py-2 px-4 no-underline bg-sgray text-sblack rounded-full text-sm font-medium transition-all duration-300 ease-in-out hover:bg-hred hover:text-white;
+
+        &.active {
+          @apply bg-hred text-white;
+        }
+      }
+    }
+
+    .archive-grid {
+      @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 pb-12;
+
+      .loop-casos-item {
+        @apply bg-white rounded-lg overflow-hidden shadow-md;
+
+        &__img {
+          @apply relative overflow-hidden;
+
+          a {
+            @apply block;
+
+            img {
+              @apply w-full h-auto transition-transform duration-300 ease-in-out hover:scale-105;
+            }
+          }
+        }
+
+        &__content {
+          @apply p-4;
+        }
+
+        &__title {
+          @apply text-lg font-bold mb-2;
+        }
+
+        &__terms {
+          @apply flex flex-wrap gap-2 mb-4;
+        }
+
+        &__category {
+          @apply text-xs py-1 px-3 bg-sgray text-sblack rounded-full hover:bg-hred hover:text-white transition-all duration-300 ease-in-out;
+        }
+
+        &__buttons {
+          @apply flex flex-col gap-2 mt-4;
+        }
+
+        &__link {
+          @include u.btn-primary;
+          @apply text-sm py-2 w-full text-center;
+        }
+
+        &__external {
+          @include u.btn-primary;
+          @apply text-sm text-center py-2 px-4 border border-sblack text-sblack bg-white rounded hover:bg-sblack hover:text-white transition-all duration-300 ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.archive-pagination {
+  @apply flex items-center justify-center mt-8 mb-12;
+
+  .navigation {
+    @apply w-full;
+  }
+
+  .screen-reader-text {
+    @apply sr-only;
+  }
+
+  .nav-links {
+    @apply flex items-center justify-center flex-wrap gap-2;
+
+    .page-numbers {
+      @apply inline-flex items-center justify-center min-w-[40px] h-10 px-2 
+             rounded-md bg-sgray text-sblack font-medium text-base no-underline
+             transition-all duration-300 ease-in-out hover:bg-hred hover:text-white;
+
+      &.current {
+        @apply bg-hred text-white;
+      }
+
+      &.prev, &.next {
+        @apply px-2;
+      }
+    }
+  }
+}
+

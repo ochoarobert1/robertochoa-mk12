@@ -1,0 +1,14 @@
+@use "../common/utilities" as u;
+@reference "tailwindcss";
+
+.banner-title-container {
+  @apply py-16 max-w-full w-full flex items-center justify-center;
+
+  .banner-title-wrapper {
+    @apply max-w-[90%] w-full flex items-center justify-start;
+
+    .banner-title {
+      @apply text-3xl sm:text-5xl font-extralight;
+    }
+  }
+}
