@@ -8,19 +8,22 @@
  * @since Mk.12
  */
 
+if (!defined('ABSPATH')) {
+    exit;
+}
 ?>
 <?php get_header(); ?>
 <?php the_post(); ?>
 <main class="main-contain">
     <div id="mainRow" class="custom-row">
-       <?php get_template_part('templates/home/banner'); ?>
-       <?php get_template_part('templates/home/numbers'); ?>
-       <?php get_template_part('templates/home/about'); ?>
-       <?php get_template_part('templates/home/tools'); ?>
-       <?php get_template_part('templates/home/services'); ?>
-       <?php get_template_part('templates/home/portfolio'); ?>
-       <?php get_template_part('templates/home/blog'); ?>
-       <?php get_template_part('templates/home/contact'); ?>
+        <?php get_template_part('templates/home/banner'); ?>
+        <?php get_template_part('templates/home/numbers'); ?>
+        <?php get_template_part('templates/home/about'); ?>
+        <?php get_template_part('templates/home/tools'); ?>
+        <?php get_template_part('templates/home/services'); ?>
+        <?php get_template_part('templates/home/portfolio'); ?>
+        <?php get_template_part('templates/home/blog'); ?>
+        <?php get_template_part('templates/home/contact'); ?>
     </div>
 </main>
 <?php get_footer(); ?>

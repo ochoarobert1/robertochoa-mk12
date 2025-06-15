@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Content: Mobile Contact Form Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <?php $contact_data = get_option('ro_contact_data'); ?>
 <div class="mobile-extend contact-data">
   <?php $contact_phones = explode(',', $contact_data['phone']); ?>

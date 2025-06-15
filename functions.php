@@ -31,6 +31,8 @@ class RobertMainThemeClass
         add_action('do_feed_atom', [$this, 'disableFeed'], 1);
         add_filter('upload_mimes', [$this, 'addMimeTypes']);
         add_action('customize_register', [$this, 'customizeSection']);
+        add_action('get_the_archive_title', [$this, 'remove_archive_tagtitle'], 1, 1);
+        add_action('pre_get_posts', [$this, 'modify_casos_posts_per_page'], 1, 1);
 
         if (!is_admin()) {
             add_action('wp_enqueue_scripts', [$this, 'enqueueJquery']);
@@ -93,6 +95,9 @@ class RobertMainThemeClass
             'before_title'  => '<h3 class="widget-title">',
             'after_title'   => '</h3>',
         ]);
+
+        add_image_size('large-thumb', 500, 650, ['center', 'center']);
+        add_image_size('mobile-thumb', 670, 380, ['center', 'center']);
     }
 
     /**
@@ -166,6 +171,43 @@ class RobertMainThemeClass
             'section'  => 'footer',
             'settings' => 'footer_copyright'
         ]);
+    }
+
+    /**
+     * Method remove_archive_tagtitle
+     *
+     * @param $title string
+     *
+     * @return void
+     */
+    public function remove_archive_tagtitle($title)
+    {
+        if (is_category()) {
+            $title = single_cat_title('', false);
+        } elseif (is_tag()) {
+            $title = single_tag_title('', false);
+        } elseif (is_author()) {
+            $title = '<span class="vcard">' . get_the_author() . '</span>';
+        } elseif (is_tax()) { //for custom post types
+            $title = sprintf(__('%1$s'), single_term_title('', false));
+        } elseif (is_post_type_archive()) {
+            $title = post_type_archive_title('', false);
+        }
+        return $title;
+    }
+
+    /**
+     * Method modify_casos_posts_per_page
+     *
+     * @param $query object
+     *
+     * @return void
+     */
+    public function modify_casos_posts_per_page($query)
+    {
+        if (!is_admin() && $query->is_main_query() && is_post_type_archive('casos')) {
+            $query->set('posts_per_page', 20);
+        }
     }
 }
 

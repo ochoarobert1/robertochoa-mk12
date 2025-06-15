@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Success Stories Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-success-container">
     <header class="main-success-title">
         <?php $portfolio_title = ro_meta_value('ro_home_portfolio_title'); ?>
