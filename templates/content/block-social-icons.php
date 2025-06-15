@@ -1,5 +1,17 @@
 <?php
 
+/**
+ * Content: Social Icons Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 $social_icons = get_option('ro_social_networks'); ?>
 <div class="social-icons-container">
     <?php if (is_array($social_icons)) : ?>

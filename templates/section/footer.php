@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Footer Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <footer id="mainFooter" class="footer-section">
     <div class="footer-wrapper">
         <div class="footer-item">

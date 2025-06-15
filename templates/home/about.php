@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: About Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-about-container" style="z-index: 3;">
     <div class="main-about-content">
         <picture class="main-about-image">

@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Header Section
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html <?php language_attributes() ?>>
 

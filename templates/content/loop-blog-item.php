@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Content: Articles Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <article class="main-blog-article">
     <picture class="main-blog-picture-thumb">
         <?php $terms = get_the_category(); ?>

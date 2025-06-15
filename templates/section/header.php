@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Header Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <header id="mainHeader" class="main-header-container">
     <div class="header-phone flex md:hidden">
         <a href="tel:+584141300819" title="<?php esc_attr_e('Haz click aquí para empezar a conversar', 'robertochoa'); ?>">

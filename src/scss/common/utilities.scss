@@ -3,7 +3,7 @@
 // Common button styles
 @mixin btn-primary {
   @apply box-border text-center inline-block bg-hred text-white uppercase font-light 
-         tracking-wider no-underline
+         tracking-wide md:tracking-wider no-underline
          py-3 px-4 sm:py-3 sm:px-6 md:py-3 md:px-8 lg:py-4 lg:px-8
          text-sm sm:text-base md:text-base lg:text-base
          transition-all duration-300 ease-in-out 

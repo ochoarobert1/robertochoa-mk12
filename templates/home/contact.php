@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Contact Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-contact-section">
     <header class="main-contact-title">
         <?php $contact_title = ro_meta_value('ro_home_contact_title'); ?>

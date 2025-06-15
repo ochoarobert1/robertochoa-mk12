@@ -1,3 +1,17 @@
+<?php
+
+/**
+ * Home: Services Template Part
+ *
+ * @package RobertOchoa
+ * @subpackage robertochoa-mk12-theme
+ * @since Mk.12
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+?>
 <section class="main-services-container">
     <header class="main-services-title">
         <?php $service_title = ro_meta_value('ro_home_services_title'); ?>
