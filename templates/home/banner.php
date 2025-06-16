@@ -12,11 +12,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section class="main-hero-container" style="background-color: #FFF;">
+<section id="top" class="main-hero-container" style="background-color: #FFF;">
     <article class="main-hero-content">
         <?php the_content(); ?>
         <div class="main-hero-content-button" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
-            <a href="#" class="btn" title="<?php esc_attr_e('Hablemos de como comenzar tu negocio', 'robertochoa'); ?>" itemprop="target"><span itemprop="name"><?php esc_html_e('Hablemos', 'robertochoa'); ?></span></a>
+            <a href="#contact" class="btn" title="<?php esc_attr_e('Hablemos de como comenzar tu negocio', 'robertochoa'); ?>" itemprop="target"><span itemprop="name"><?php esc_html_e('Hablemos', 'robertochoa'); ?></span></a>
         </div>
     </article>
     <picture class="main-hero-image" style="z-index: 99;">
