@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 			<?php endif; ?>
 		</h1>
 		<div class="banner-subtitle">
-			<?php get_the_archive_description(); ?>
+			<?php echo get_the_archive_description(); ?>
 		</div>
 	</div>
 </section>
