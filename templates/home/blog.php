@@ -12,12 +12,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section id="blog" class="main-blog-section">
+<section id="blog" class="main-blog-section" itemscope itemtype="https://schema.org/Blog">
     <header class="main-blog-title">
         <?php $section_title = ro_meta_value('ro_home_blog_title'); ?>
         <?php $description = ro_meta_value('ro_home_blog_desc'); ?>
-        <h2><?php echo esc_html($section_title); ?></h2>
-        <?php echo wp_kses_post(apply_filters('the_content', $description)); ?>
+        <h2 itemprop="name"><?php echo esc_html($section_title); ?></h2>
+        <div itemprop="description">
+            <?php echo wp_kses_post(apply_filters('the_content', $description)); ?>
+        </div>
     </header>
     <div class="main-blog-content">
         <?php $arr_blog = new WP_Query([

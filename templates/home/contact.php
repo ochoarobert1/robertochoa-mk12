@@ -12,7 +12,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section id="contact" class="main-contact-section">
+<section id="contact" class="main-contact-section" itemscope itemtype="https://schema.org/Person">
+    <meta itemprop="name" content="Robert Ochoa">
+    <meta itemprop="url" content="<?php echo esc_url(home_url('/')); ?>">
     <header class="main-contact-title">
         <?php $contact_title = ro_meta_value('ro_home_contact_title'); ?>
         <?php $description = ro_meta_value('ro_home_contact_desc'); ?>

@@ -25,7 +25,8 @@ if (!defined('ABSPATH')) {
                 <?php $btn_link = ro_meta_value('ro_home_about_btn_url'); ?>
                 <?php $btn_text = ro_meta_value('ro_home_about_btn_text'); ?>
                 <?php if ('' !== $btn_link) : ?>
-                <a href="<?php echo esc_url($btn_link); ?>" class="btn" title="<?php echo esc_attr($btn_text);  ?>" itemprop="target"><span itemprop="name"><?php echo esc_html($btn_text); ?></span></a>
+                    <a href="<?php echo esc_url($btn_link); ?>" class="btn" title="<?php echo esc_attr($btn_text);  ?>" itemprop="target"><span itemprop="name"><?php echo esc_html($btn_text); ?></span></a>
+                    <meta itemprop="actionStatus" content="https://schema.org/PotentialActionStatus" />
                 <?php endif; ?>
             </div>
         </article>
