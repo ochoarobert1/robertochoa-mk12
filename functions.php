@@ -67,10 +67,10 @@ class RobertMainThemeClass
         add_theme_support('custom-logo', [
             'height'      => 70,
             'width'       => 57,
-            'flex-width'  => false,
-            'flex-height' => false,
+            'flex-width'  => true,
+            'flex-height' => true,
             'header-text' => ['site-title', 'site-description'],
-            'unlink-homepage-logo' => true,
+            'unlink-homepage-logo' => false,
             'class' => 'logo'
         ]);
 
@@ -220,3 +220,4 @@ require_once('includes/wp-metabox-class.php');
 require_once('includes/wp-post-type.php');
 require_once('includes/wp-nav-walker.php');
 require_once('includes/wp-customizer-class.php');
+require_once('includes/wp-ajax-handlers.php');

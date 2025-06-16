@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section class="main-success-container">
+<section id="casos" class="main-success-container">
     <header class="main-success-title">
         <?php $portfolio_title = ro_meta_value('ro_home_portfolio_title'); ?>
         <h2><?php echo esc_html($portfolio_title); ?></h2>
@@ -43,8 +43,10 @@ if (!defined('ABSPATH')) {
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
     <div class="main-success-content-button" itemprop="potentialAction" itemscope itemtype="http://schema.org/CommunicateAction">
-        <?php $btn_link = ro_meta_value('ro_home_portfolio_btn_link'); ?>
+        <?php $btn_link = ro_meta_value('ro_home_portfolio_btn_url'); ?>
         <?php $btn_text = ro_meta_value('ro_home_portfolio_btn_text'); ?>
+        <?php if ('' !== $btn_link) : ?>
         <a href="<?php echo esc_url($btn_link); ?>" class="btn" title="<?php echo esc_attr($btn_text);  ?>" itemprop="target"><span itemprop="name"><?php echo esc_html($btn_text); ?></span></a>
+        <?php endif; ?>
     </div>
 </section>

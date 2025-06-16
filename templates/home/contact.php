@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section class="main-contact-section">
+<section id="contact" class="main-contact-section">
     <header class="main-contact-title">
         <?php $contact_title = ro_meta_value('ro_home_contact_title'); ?>
         <?php $description = ro_meta_value('ro_home_contact_desc'); ?>
