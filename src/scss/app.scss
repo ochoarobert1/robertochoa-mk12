@@ -15,6 +15,10 @@
 
 @reference "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply p-0 m-0 max-w-full;
 }

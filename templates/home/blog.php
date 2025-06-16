@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<section class="main-blog-section">
+<section id="blog" class="main-blog-section">
     <header class="main-blog-title">
         <?php $section_title = ro_meta_value('ro_home_blog_title'); ?>
         <?php $description = ro_meta_value('ro_home_blog_desc'); ?>
@@ -36,7 +36,9 @@ if (!defined('ABSPATH')) {
     </div>
     <footer class="main-blog-footer">
         <?php $btn_text = ro_meta_value('ro_home_blog_btn_text'); ?>
-        <?php $btn_link = ro_meta_value('ro_home_blog_btn_link'); ?>
+        <?php $btn_link = ro_meta_value('ro_home_blog_btn_url'); ?>
+        <?php if ('' !== $btn_link) : ?>
         <a href="<?php echo esc_url($btn_link); ?>" class="btn-blog" title="<?php echo esc_attr($btn_text); ?>"><?php echo esc_html($btn_text); ?></a>
+        <?php endif; ?>
     </footer>
 </section>

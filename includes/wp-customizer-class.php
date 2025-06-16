@@ -39,6 +39,36 @@ if (!class_exists('RO_Customizer')) {
         public function registerCustomizer($wp_customize)
         {
             $wp_customize->add_section(
+                'ro_webhook_data',
+                [
+                    'title' => esc_attr__('Webhooks & APIs', 'robertochoa'),
+                    'description' => esc_attr__('Webhooks & API para Automatizaciones', 'robertochoa'),
+                    'priority' => 30
+                ]
+            );
+
+            $wp_customize->add_setting(
+                'ro_webhook_data[discord_webhook]',
+                [
+                    'default'        => '',
+                    'capability'     => 'edit_theme_options',
+                    'type'           => 'option',
+                    'sanitize_callback' => 'sanitize_url',
+                ]
+            );
+
+            $wp_customize->add_control(
+                'discord_webhook',
+                [
+                    'type'       => 'url',
+                    'label'      => esc_attr__('Discord Webhook', 'robertochoa'),
+                    'description' => esc_html__('Ingresa la Webhook URL para el Discord', 'robertochoa'),
+                    'section'    => 'ro_webhook_data',
+                    'settings'   => 'ro_webhook_data[discord_webhook]'
+                ]
+            );
+
+            $wp_customize->add_section(
                 'ro_contact_data',
                 [
                     'title' => esc_attr__('Datos de Contacto', 'robertochoa'),
