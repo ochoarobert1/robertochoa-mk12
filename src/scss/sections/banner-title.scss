@@ -5,10 +5,10 @@
   @apply py-16 max-w-full w-full flex items-center justify-center;
 
   .banner-title-wrapper {
-    @apply max-w-[90%] w-full flex items-center justify-start;
+    @apply max-w-[90%] w-full flex flex-col items-start justify-start;
 
     .banner-title {
-      @apply text-3xl sm:text-5xl font-extralight;
+      @apply text-3xl sm:text-5xl my-2 font-extralight;
     }
   }
 }
