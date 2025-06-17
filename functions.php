@@ -33,6 +33,8 @@ class RobertMainThemeClass
         add_action('customize_register', [$this, 'customizeSection']);
         add_action('get_the_archive_title', [$this, 'remove_archive_tagtitle'], 1, 1);
         add_action('pre_get_posts', [$this, 'modify_casos_posts_per_page'], 1, 1);
+        add_filter('wp_kses_allowed_html', [$this, 'allow_microdata_attributes'], 10, 2);
+
 
         if (!is_admin()) {
             add_action('wp_enqueue_scripts', [$this, 'enqueueJquery']);
@@ -208,6 +210,33 @@ class RobertMainThemeClass
         if (!is_admin() && $query->is_main_query() && is_post_type_archive('casos')) {
             $query->set('posts_per_page', 20);
         }
+    }
+
+    /**
+     * Allow microdata attributes in CMB2 WYSIWYG fields
+     * 
+     * @param array $allowed_tags Allowed HTML tags
+     * @param string $context Context for which to retrieve tags
+     * @return array Modified allowed tags
+     */
+    public function allow_microdata_attributes($allowed_tags, $context)
+    {
+        if ($context === 'post') {
+            // Add microdata attributes to all existing allowed elements
+            foreach ($allowed_tags as $tag => &$attributes) {
+                $attributes['itemprop'] = true;
+                $attributes['itemscope'] = true;
+                $attributes['itemtype'] = true;
+            }
+
+            // Add meta tag with allowed attributes
+            $allowed_tags['meta'] = [
+                'itemprop' => true,
+                'content' => true,
+                'name' => true
+            ];
+        }
+        return $allowed_tags;
     }
 }
 
