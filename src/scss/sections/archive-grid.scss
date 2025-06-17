@@ -67,6 +67,43 @@
           @apply text-sm text-center py-2 px-4 border border-sblack text-sblack bg-white rounded hover:bg-sblack hover:text-white transition-all duration-300 ease-in-out;
         }
       }
+
+      .loop-certificate-item {
+        @apply bg-white rounded-lg overflow-hidden shadow-md p-5 flex flex-col h-full;
+
+        header {
+          @apply mb-4 border-b border-gray-200 pb-3;
+
+          .loop-certificate-item__id {
+            @apply text-xs font-mono inline-block py-1 rounded mb-1;
+          }
+
+          h2 {
+            @apply text-lg my-2 font-bold min-h-[70px];
+          }
+        }
+
+        &__content {
+          @apply flex-grow flex-col md:flex-row flex gap-4 md:gap-2 items-start md:items-center justify-start md:justify-between mb-16;
+
+          .issuer {
+            @apply text-sm font-medium;
+          }
+
+          .date {
+            @apply text-sm text-gray-500;
+          }
+        }
+
+        &__button {
+          @apply mt-auto;
+
+          .btn {
+            @include u.btn-primary;
+            @apply text-sm py-2 w-full text-center;
+          }
+        }
+      }
     }
   }
 }
@@ -94,10 +131,10 @@
         @apply bg-hred text-white;
       }
 
-      &.prev, &.next {
+      &.prev,
+      &.next {
         @apply px-2;
       }
     }
   }
 }
-

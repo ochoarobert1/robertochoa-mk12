@@ -210,6 +210,10 @@ class RobertMainThemeClass
         if (!is_admin() && $query->is_main_query() && is_post_type_archive('casos')) {
             $query->set('posts_per_page', 20);
         }
+
+         if (!is_admin() && $query->is_main_query() && is_post_type_archive('certificados')) {
+            $query->set('posts_per_page', 40);
+        }
     }
 
     /**
