@@ -242,7 +242,7 @@ class ROCustomPostType
     {
 
         $labels = [
-            'name'                  => esc_html_x('Certificados', 'Post Type General Name', 'robertochoa'),
+            'name'                  => esc_html_x('Certificados y Educación', 'Post Type General Name', 'robertochoa'),
             'singular_name'         => esc_html_x('Certificado', 'Post Type Singular Name', 'robertochoa'),
             'menu_name'             => esc_html__('Certificados', 'robertochoa'),
             'name_admin_bar'        => esc_html__('Certificado', 'robertochoa'),
@@ -271,8 +271,8 @@ class ROCustomPostType
             'filter_items_list'     => esc_html__('Filtro del Listado de Certificado', 'robertochoa'),
         ];
         $args = [
-            'label'                 => esc_html__('Certificado', 'robertochoa'),
-            'description'           => esc_html__('Certificados', 'robertochoa'),
+            'label'                 => esc_html__('Certificados y Educación', 'robertochoa'),
+            'description'           => esc_html__('Explora los certificados y mi formación académica en cuanto al desarrollo web. Descubre cursos completados, diplomas y habilidades técnicas que poseo para impulsan tu negocio digital', 'robertochoa'),
             'labels'                => $labels,
             'supports'              => ['title'],
             'hierarchical'          => false,
@@ -332,7 +332,7 @@ class ROCustomPostType
         ];
         $args = [
             'label'                 => esc_html__('Caso de Éxito', 'robertochoa'),
-            'description'           => esc_html__('Casos de Éxito', 'robertochoa'),
+            'description'           => esc_html__('Descubre mis Casos de Éxito e historias de mis clientes: Tiendas online con WooCommerce, sitios web corporativos y sistemas a medida en WordPress para clientes en todo el mundo.', 'robertochoa'),
             'labels'                => $labels,
             'supports'              => ['title', 'editor', 'thumbnail'],
             'taxonomies'            => ['categoria-casos'],
