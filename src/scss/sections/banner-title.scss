@@ -11,4 +11,8 @@
       @apply text-3xl sm:text-5xl my-2 font-extralight;
     }
   }
+
+  .banner-subtitle {
+    @apply text-sm md:text-base;
+  }
 }
