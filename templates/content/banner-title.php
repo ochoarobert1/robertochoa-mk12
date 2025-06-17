@@ -25,4 +25,5 @@ if (!defined('ABSPATH')) {
 			<?php echo get_the_archive_description(); ?>
 		</div>
 	</div>
+
 </section>
