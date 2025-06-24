@@ -12,7 +12,7 @@
 <?php get_header(); ?>
 <main class="main-contain">
 	<div id="mainRow" class="custom-row">
-		<?php get_template_part('templates/home/banner'); ?>
+		<?php get_template_part('templates/content/banner-title'); ?>
 		<?php get_template_part('templates/content/blog-articles'); ?>
 		<div class="archive-pagination">
 			<?php the_posts_pagination(array(
