@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
-import { viteStaticCopy } from "vite-plugin-static-copy";
-import postcss from "@tailwindcss/postcss";
-import { existsSync, rmSync } from "fs";
+import { defineConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import postcss from '@tailwindcss/postcss';
+import { existsSync, rmSync } from 'fs';
 
 // Clean the dist directory before build
-if (existsSync("./dist")) {
-  console.log("Cleaning dist directory...");
-  rmSync("./dist", { recursive: true, force: true });
+if (existsSync('./dist')) {
+  console.log('Cleaning dist directory...');
+  rmSync('./dist', { recursive: true, force: true });
 }
 
 export default defineConfig({
@@ -17,16 +17,17 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist",
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        functions: "src/index.js",
-        styles: "src/scss/app.scss",
+        functions: 'src/index.js',
+        styles: 'src/scss/app.scss',
+        admin: 'src/scss/admin-app.scss',
       },
       output: {
-        entryFileNames: "[name].js",
-        assetFileNames: "[name].[ext]",
+        entryFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
       },
     },
   },
@@ -39,8 +40,8 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: "src/json/*.json",
-          dest: ".",
+          src: 'src/json/*.json',
+          dest: '.',
         },
       ],
     }),

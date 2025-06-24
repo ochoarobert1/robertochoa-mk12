@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 <section class="banner-title-container">
 	<div class="banner-title-wrapper">
 		<h1 class="banner-title">
-			<?php if (is_archive()) : ?>
+			<?php if (is_archive() || is_home()) : ?>
 				<?php echo wp_kses_post(get_the_archive_title()); ?>
 			<?php else : ?>
 				<?php the_title(); ?>
