@@ -22,7 +22,11 @@ if (!defined('ABSPATH')) {
 			<?php endif; ?>
 		</h1>
 		<div class="banner-subtitle">
-			<?php echo get_the_archive_description(); ?>
+			<?php if (is_single()) : ?>
+				<?php echo wp_kses_post(get_the_excerpt()); ?>
+			<?php else : ?>
+				<?php echo wp_kses_post(get_the_archive_description()); ?>
+			<?php endif; ?>
 		</div>
 	</div>
 
