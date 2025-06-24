@@ -1,4 +1,4 @@
-@use "../common/utilities" as u;
+@use '../common/utilities' as u;
 @reference "tailwindcss";
 
 .banner-title-container {
@@ -13,6 +13,6 @@
   }
 
   .banner-subtitle {
-    @apply text-sm md:text-base;
+    @apply my-8 text-sm md:text-base;
   }
 }
