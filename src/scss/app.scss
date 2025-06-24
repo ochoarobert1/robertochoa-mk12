@@ -1,17 +1,18 @@
-@use "common/tailwind";
-@use "common/utilities";
-@use "sections/header";
-@use "sections/footer";
-@use "home/banner";
-@use "home/numbers";
-@use "home/about";
-@use "home/tools";
-@use "home/services";
-@use "home/portfolio";
-@use "home/blog";
-@use "home/contact";
-@use "sections/banner-title";
-@use "sections/archive-grid";
+@use 'common/tailwind';
+@use 'common/utilities';
+@use 'sections/header';
+@use 'sections/footer';
+@use 'home/banner';
+@use 'home/numbers';
+@use 'home/about';
+@use 'home/tools';
+@use 'home/services';
+@use 'home/portfolio';
+@use 'home/blog';
+@use 'home/contact';
+@use 'sections/banner-title';
+@use 'sections/archive-grid';
+@use 'sections/single';
 
 @reference "tailwindcss";
 

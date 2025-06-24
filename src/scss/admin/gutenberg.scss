@@ -1,0 +1,61 @@
+@use '../common/utilities' as u;
+@reference "tailwindcss";
+
+.editor-styles-wrapper {
+  @apply max-w-4xl mx-auto p-8 leading-relaxed;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-6 mb-4 font-semibold;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply mb-4 text-base;
+  }
+
+  .wp-block-gallery {
+    @apply flex flex-wrap gap-2 w-full mx-0;
+
+    .wp-block-image {
+      @apply relative overflow-hidden cursor-pointer;
+      flex: 0 0 calc(48% - 0.25rem);
+
+      img {
+        @apply w-full h-auto transition-transform duration-300 hover:scale-105;
+      }
+    }
+
+    &.columns-1 .wp-block-image {
+      flex: 0 0 100%;
+    }
+    &.columns-2 .wp-block-image {
+      flex: 0 0 calc(48% - 0.25rem);
+    }
+    &.columns-3 .wp-block-image {
+      flex: 0 0 calc(32.333% - 0.25rem);
+    }
+    &.columns-4 .wp-block-image {
+      flex: 0 0 calc(23% - 0.25rem);
+    }
+    &.columns-5 .wp-block-image {
+      flex: 0 0 calc(19.5% - 0.25rem);
+    }
+    &.columns-6 .wp-block-image {
+      flex: 0 0 calc(16% - 0.25rem);
+    }
+  }
+}

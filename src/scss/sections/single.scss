@@ -1,0 +1,327 @@
+@use '../common/utilities' as u;
+@reference "tailwindcss";
+
+.article-post-container {
+  @apply w-full max-w-full lg:max-w-[90%] xl:max-w-[80%] container px-8 mx-auto flex flex-wrap items-start justify-between gap-2;
+}
+
+.main-post-wrapper {
+  @apply w-full max-w-full lg:w-[60%] lg:max-w-[60%] xl:w-[70%] xl:max-w-[70%] leading-relaxed;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-6 mb-4;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  pre {
+    @apply text-pretty break-normal;
+  }
+}
+
+.main-post-aside {
+  @apply w-full max-w-full lg:w-[30%] lg:max-w-[30%] xl:w-[25%] xl:max-w-[25%];
+}
+
+.related-articles {
+  @apply w-full max-w-full mt-12 pt-8 border-t border-gray-200;
+}
+
+// Calendar Widget
+.wp-calendar-table {
+  @apply w-full border-collapse text-sm;
+
+  caption {
+    @apply mb-2 font-semibold capitalize;
+  }
+
+  th {
+    @apply p-2 text-center font-medium text-gray-600;
+  }
+
+  td {
+    @apply p-2 text-center border border-gray-200;
+
+    &.pad {
+      @apply border-0;
+    }
+
+    &#today {
+      @apply bg-blue-500 text-white font-semibold;
+    }
+  }
+}
+
+.wp-block-gallery {
+  @apply flex flex-wrap gap-2 w-full mx-0;
+
+  .wp-block-image {
+    @apply relative overflow-hidden cursor-pointer;
+    flex: 0 0 calc(48% - 0.25rem);
+
+    img {
+      @apply w-full h-auto transition-transform duration-300 hover:scale-105;
+    }
+  }
+
+  &.columns-1 .wp-block-image {
+    flex: 0 0 100%;
+  }
+  &.columns-2 .wp-block-image {
+    flex: 0 0 calc(48% - 0.25rem);
+  }
+  &.columns-3 .wp-block-image {
+    flex: 0 0 calc(32.333% - 0.25rem);
+  }
+  &.columns-4 .wp-block-image {
+    flex: 0 0 calc(23% - 0.25rem);
+  }
+  &.columns-5 .wp-block-image {
+    flex: 0 0 calc(19.5% - 0.25rem);
+  }
+
+  @media (max-width: 768px) {
+    &.columns-3 .wp-block-image,
+    &.columns-4 .wp-block-image,
+    &.columns-5 .wp-block-image {
+      flex: 0 0 calc(48% - 0.25rem);
+    }
+  }
+}
+
+// Lightbox
+.lightbox {
+  @apply fixed inset-0 bg-black/90 z-[99999];
+
+  img {
+    @apply max-w-full max-h-full object-contain;
+  }
+
+  .close {
+    @apply absolute top-4 right-4 text-white text-3xl cursor-pointer hover:opacity-70;
+  }
+
+  .prev,
+  .next {
+    @apply absolute top-1/2 -translate-y-1/2 text-white text-4xl cursor-pointer hover:opacity-70 select-none;
+  }
+
+  .prev {
+    @apply left-4;
+  }
+
+  .next {
+    @apply right-4;
+  }
+}
+.wp-block-details {
+  @apply border border-gray-300 rounded-lg mb-4;
+
+  summary {
+    @apply p-4 bg-gray-100 cursor-pointer font-medium hover:bg-gray-200 transition-colors;
+  }
+
+  &[open] {
+    summary {
+      @apply border-b border-gray-300;
+    }
+  }
+
+  > *:not(summary) {
+    @apply p-4;
+  }
+}
+
+.wp-block-table {
+  @apply mb-6 overflow-x-auto;
+
+  table {
+    @apply w-full border-collapse border border-gray-300;
+
+    th,
+    td {
+      @apply p-3 border border-gray-300 text-left;
+    }
+
+    th {
+      @apply bg-gray-100 font-semibold;
+    }
+
+    tbody tr:nth-child(even) {
+      @apply bg-gray-50;
+    }
+
+    tfoot {
+      @apply bg-gray-100 font-medium;
+    }
+  }
+}
+
+.wp-block-columns {
+  @apply flex flex-col md:flex-row flex-wrap gap-4 mb-6;
+
+  .wp-block-column {
+    @apply flex-1 min-w-0;
+  }
+
+  &:has(.wp-block-column:nth-child(2):last-child) .wp-block-column {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+
+  &:has(.wp-block-column:nth-child(3):last-child) .wp-block-column {
+    flex: 0 0 calc(33.333% - 0.67rem);
+  }
+
+  &:has(.wp-block-column:nth-child(4):last-child) .wp-block-column {
+    flex: 0 0 calc(25% - 0.75rem);
+  }
+
+  &:has(.wp-block-column:nth-child(5):last-child) .wp-block-column {
+    flex: 0 0 calc(20% - 0.8rem);
+  }
+
+  &:has(.wp-block-column:nth-child(6):last-child) .wp-block-column {
+    flex: 0 0 calc(16.666% - 0.83rem);
+  }
+
+  @media (max-width: 768px) {
+    &:has(.wp-block-column:nth-child(2):last-child) .wp-block-column {
+      flex: 0 0 100%;
+    }
+
+    &:has(.wp-block-column:nth-child(3):last-child) .wp-block-column {
+      flex: 0 0 100%;
+    }
+
+    &:has(.wp-block-column:nth-child(4):last-child) .wp-block-column {
+      flex: 0 0 100%;
+    }
+
+    &:has(.wp-block-column:nth-child(5):last-child) .wp-block-column {
+      flex: 0 0 100%;
+    }
+
+    &:has(.wp-block-column:nth-child(6):last-child) .wp-block-column {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+iframe {
+  @apply max-w-full h-auto;
+}
+
+.comments-area {
+  @apply mt-12 pt-8 border-t border-gray-200;
+
+  .comment-reply-title {
+    @apply text-xl font-semibold mb-4;
+  }
+
+  .comment-list {
+    @apply list-none p-0 mb-8;
+    
+    .comment {
+      @apply mb-6 p-4 border border-gray-200 rounded;
+      
+      .comment-body {
+        @apply block;
+      }
+      
+      .comment-meta {
+        @apply flex-1;
+        
+        .comment-author {
+          @apply flex items-center gap-2 mb-2;
+          
+          .avatar {
+            @apply rounded-full;
+          }
+          
+          .fn {
+            @apply font-semibold;
+          }
+        }
+        
+        .comment-metadata {
+          @apply text-sm text-gray-500 mb-2;
+        }
+        
+        .comment-awaiting-moderation {
+          @apply text-yellow-600 text-sm;
+        }
+      }
+      
+      .comment-content {
+        @apply mt-2;
+      }
+    }
+  }
+
+  .comment-form-cookies-consent {
+    @apply flex items-center;
+
+    label {
+      @apply mb-0!;
+    }
+  }
+
+  .comment-form {
+    p {
+      @apply mb-4;
+    }
+
+    label {
+      @apply block mb-2 font-medium;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='url'],
+    textarea {
+      @apply w-full max-w-full p-3 border border-gray-300 rounded focus:border-blue-500 focus:outline-none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .required {
+      @apply text-red-500;
+    }
+
+    .submit {
+      @include u.btn-primary;
+      @apply border-0 w-full md:w-auto mt-4 sm:mt-0 md:mt-0 lg:mt-5;
+    }
+  }
+}
+/*
+<ol class="comment-list">
+					<li id="comment-2" class="comment even thread-even depth-1">
+			<article id="div-comment-2" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="https://secure.gravatar.com/avatar/ae1041bb07a750859b9b7b89be672d0bc15d6a729236765d76e5bc1778786f74?s=32&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/ae1041bb07a750859b9b7b89be672d0bc15d6a729236765d76e5bc1778786f74?s=64&amp;d=mm&amp;r=g 2x" class="avatar avatar-32 photo" height="32" width="32" decoding="async">						<b class="fn">Robert Ochoa</b> <span class="says">dice:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://localhost:1013/un-favor-incondicional/#comment-2"><time datetime="2025-06-23T23:22:35-04:00">junio 23, 2025 a las 11:22 pm</time></a>					</div><!-- .comment-metadata -->
+
+										<em class="comment-awaiting-moderation">Tu comentario está pendiente de moderación. Esto es una vista previa; tu comentario será visible cuando se haya aprobado.</em>
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					Esto es un comentario normal
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol>
+*/
