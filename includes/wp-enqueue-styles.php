@@ -9,33 +9,48 @@
  */
 
 if (!defined('ABSPATH')) {
-    die('Invalid request.');
+	die('Invalid request.');
 }
 
-/**
- * Method ro_load_styles
- *
- * @return void
- */
-function ro_load_styles()
-{
-    $version_remove = null;
-    if (!is_admin()) {
-        //wp_register_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap', false, $version_remove, 'all');
-        //wp_enqueue_style('google-fonts');
+if (!class_exists('RO_Enqueue_Styles')) {
+	/**
+	 * RO_Enqueue_Styles
+	 */
+	class RO_Enqueue_Styles
+	{
+		/**
+		 * Method __construct
+		 *
+		 * @return void
+		 */
+		public function __construct()
+		{
+			add_action('wp_enqueue_scripts', [$this, 'load_frontend_styles'], 1);
+			add_action('enqueue_block_editor_assets', [$this, 'load_admin_styles']);
+		}
 
-        wp_register_style('tw-style', get_template_directory_uri() . '/dist/styles.css', false, $version_remove, 'all');
-        wp_enqueue_style('tw-style');
-        /*
-        wp_register_style('main-style', get_template_directory_uri() . '/css/robertochoa-style.css', false, $version_remove, 'all');
-        wp_enqueue_style('main-style');
+		/**
+		 * Method load_frontend_styles
+		 *
+		 * @return void
+		 */
+		public function load_frontend_styles()
+		{
+			if (!is_admin()) {
+				wp_enqueue_style('robertochoa-style', get_template_directory_uri() . '/dist/styles.css', [], null, 'all');
+			}
+		}
 
-        wp_register_style('main-mediaqueries', get_template_directory_uri() . '/css/robertochoa-mediaqueries.css', false, $version_remove, 'all');
-        wp_enqueue_style('main-mediaqueries');
-*/
-        //wp_register_style('wp-initial-style', get_template_directory_uri() . '/style.css', false, $version_remove, 'all');
-        //wp_enqueue_style('wp-initial-style');
-    }
+		/**
+		 * Method load_admin_styles
+		 *
+		 * @return void
+		 */
+		public function load_admin_styles()
+		{
+			wp_enqueue_style('gutenberg-style', get_template_directory_uri() . '/dist/admin.css', [], null, 'all');
+		}
+	}
+
+	new RO_Enqueue_Styles();
 }
-
-add_action('wp_enqueue_scripts', 'ro_load_styles', 1);

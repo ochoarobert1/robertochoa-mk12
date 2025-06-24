@@ -1,5 +1,5 @@
 /* Import custom fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,7 @@
 /* Custom font styles */
 @layer base {
   /* HTML5 structural elements */
-  article, aside, details, figcaption, figure, 
+  article, aside, details, figcaption, figure,
   footer, header, hgroup, main, menu, nav, section,
   summary, dialog, canvas, audio, video,
   /* HTML5 form elements */
@@ -16,19 +16,21 @@
   /* HTML5 interactive elements */
   details, dialog, menu, summary,
   /* HTML5 embedded content */
-  audio, canvas, embed, iframe, img, object, picture, 
+  audio, canvas, embed, iframe, img, object, picture,
   svg, video, source, track,
   /* HTML5 text-level elements */
   time, mark, ruby, rt, rp, bdi, wbr, data,
   /* Common block elements */
-  div, hr, 
+  div, hr,
+  /* Text input */
+  input, range, textarea,
   /* Common containers */
   table, form, ul, ol, dl {
     @apply box-border;
   }
 
   html {
-    font-family: "Roboto", system-ui, sans-serif;
+    font-family: 'Roboto', system-ui, sans-serif;
   }
 
   h1,
@@ -37,7 +39,12 @@
   h4,
   h5,
   h6 {
-    font-family: "Roboto", system-ui, sans-serif;
+    font-family: 'Roboto', system-ui, sans-serif;
+  }
+
+  input,
+  textarea {
+    font-family: 'Roboto', system-ui, sans-serif;
   }
 
   img {
