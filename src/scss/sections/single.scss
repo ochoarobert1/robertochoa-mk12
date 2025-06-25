@@ -337,3 +337,65 @@ iframe {
     }
   }
 }
+
+.wp-block-details {
+  .wp-block-list {
+    @apply pl-10;
+  }
+}
+
+.has-text-align-center {
+  @apply text-center;
+}
+
+.aligncenter {
+  @apply mx-auto my-0 text-center;
+}
+
+.bordered {
+  @apply rounded-xl;
+
+  img {
+    @apply rounded-xl;
+  }
+}
+
+.sub-leading-relaxed {
+  @apply leading-16 xl:leading-20;
+}
+
+.sub-leading-large {
+  @apply leading-12;
+}
+
+.special-gap {
+  @apply gap-4 lg:gap-8 xl:gap-16;
+}
+
+.flex-items-start {
+  @apply items-start!;
+}
+
+.service-title {
+  @apply mt-0 text-2xl md:text-3xl lg:text-4xl xl:text-5xl;
+}
+
+.service-sub-title {
+  @apply mt-0 text-xl md:text-2xl lg:text-3xl xl:text-4xl;
+}
+
+.sub-spacing {
+  @apply h-2! md:h-8! lg:h-16!;
+}
+
+.sub-text-spacing {
+  @apply tracking-widest;
+}
+
+.size-large {
+  @apply mx-0 lg:mx-auto;
+
+  img {
+    @apply w-full;
+  }
+}

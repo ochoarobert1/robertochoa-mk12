@@ -250,7 +250,8 @@ class RobertMainThemeClass
 			$allowed_tags['meta'] = [
 				'itemprop' => true,
 				'content' => true,
-				'name' => true
+				'name' => true,
+				'link' => true
 			];
 		}
 		return $allowed_tags;
