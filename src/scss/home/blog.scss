@@ -1,4 +1,4 @@
-@use "../common/utilities" as u;
+@use '../common/utilities' as u;
 @reference "tailwindcss";
 
 .main-blog-section {
@@ -47,12 +47,12 @@
         @apply relative block;
 
         .category-icon {
-          @apply bg-hred absolute top-5 -left-2.5 
+          @apply bg-hred absolute top-5 -left-2.5
                  py-1.5 pr-6 pl-[0.725rem] pb-0.5
                  rounded-[20px];
 
           img {
-            @apply w-5 h-[30px];
+            @apply w-[30px] h-[30px];
           }
         }
       }
